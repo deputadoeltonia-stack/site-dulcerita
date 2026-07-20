@@ -554,7 +554,8 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .revela { opacity: 1; transform: none; transition: none; }
-  .botao, .cta-fixo { transition: none; }
+  .botao, .cta-fixo, .cartao, .galeria-item { transition: none; }
+  .cartao:hover, .galeria-item:hover { transform: none; }
 }
 
 /* ============================================================
