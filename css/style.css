@@ -1,0 +1,511 @@
+/* ============================================================
+   Dulce Rita — Cuidar de perto
+   Paleta "Vinho de perto": vinho profundo, papel rosado,
+   rosa de destaque, âmbar só no CTA.
+   Mobile-first. Assinatura: fio pontilhado costurando a página.
+   ============================================================ */
+
+:root {
+  --vinho: #6d1f3a;
+  --vinho-escuro: #521228;
+  --papel: #faf3ef;
+  --rosa: #c9557c;
+  --ambar: #e8a13d;
+  --tinta: #2b2126;
+  --tinta-suave: #6e5f66;
+  --claro: #fdf9f7;
+
+  --fonte-display: "Gloock", "Georgia", serif;
+  --fonte-corpo: "Archivo", "Helvetica Neue", sans-serif;
+
+  --miolo: 68rem;
+  --fio-x: 1.1rem;         /* distância do fio até a borda do miolo */
+  --raio: 14px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fonte-corpo);
+  color: var(--tinta);
+  background: var(--papel);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--ambar);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.miolo {
+  max-width: var(--miolo);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ---------- tipografia ---------- */
+
+h1, h2 {
+  font-family: var(--fonte-display);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+
+h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
+
+.olho {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rosa);
+  margin-bottom: 0.9rem;
+}
+
+.olho-claro { color: var(--ambar); }
+
+.prosa p, .prosa-clara {
+  max-width: 38rem;
+  margin-bottom: 1rem;
+}
+
+.prosa-clara { color: rgba(253, 249, 247, 0.88); margin-bottom: 2rem; }
+
+/* ---------- botões ---------- */
+
+.botao {
+  display: inline-block;
+  font-family: var(--fonte-corpo);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.95rem 1.9rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.botao-ambar {
+  background: var(--ambar);
+  color: var(--tinta);
+  box-shadow: 0 4px 16px rgba(232, 161, 61, 0.35);
+}
+
+.botao-ambar:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(232, 161, 61, 0.45); }
+
+/* ---------- topo ---------- */
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1.25rem;
+  background: color-mix(in srgb, var(--vinho) 96%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--claro);
+}
+
+.topo-marca {
+  font-family: var(--fonte-display);
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.topo-nav { display: flex; align-items: center; gap: 1.4rem; }
+
+.topo-nav a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  opacity: 0.92;
+}
+
+.topo-nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+
+.topo-cta {
+  background: var(--ambar);
+  color: var(--tinta) !important;
+  font-weight: 700;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+}
+
+/* nav completa só no desktop */
+.topo-nav a:not(.topo-cta) { display: none; }
+
+/* ---------- hero ---------- */
+
+.hero {
+  background:
+    radial-gradient(90rem 40rem at 85% -10%, rgba(201, 85, 124, 0.35), transparent 60%),
+    var(--vinho);
+  color: var(--claro);
+  padding: 4rem 0 4.5rem;
+  overflow: hidden;
+}
+
+.hero-grade {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.hero-nome {
+  font-size: clamp(4rem, 17vw, 8.5rem);
+  line-height: 0.92;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.hero-slogan {
+  font-family: var(--fonte-display);
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  color: var(--ambar);
+  margin-bottom: 1.1rem;
+}
+
+.hero-frase {
+  max-width: 30rem;
+  color: rgba(253, 249, 247, 0.85);
+  margin-bottom: 2rem;
+}
+
+.foto-moldura {
+  position: relative;
+  width: min(78vw, 22rem);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--raio);
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--rosa), var(--vinho-escuro));
+  outline: 2px dashed rgba(253, 249, 247, 0.5);
+  outline-offset: 8px;
+  margin: 0 auto;
+}
+
+.foto-moldura img { width: 100%; height: 100%; object-fit: cover; }
+
+.foto-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  place-items: center;
+  font-family: var(--fonte-display);
+  font-size: 6rem;
+  color: rgba(253, 249, 247, 0.85);
+}
+
+.sem-foto img { display: none; }
+.sem-foto .foto-fallback { display: grid; }
+
+/* ---------- fio (assinatura) ---------- */
+
+.fio {
+  height: 3.5rem;
+  max-width: var(--miolo);
+  margin: 0 auto;
+  border-left: 3px dashed var(--rosa);
+  margin-left: max(calc((100vw - var(--miolo)) / 2 + var(--fio-x)), var(--fio-x));
+}
+
+.com-fio {
+  position: relative;
+  border-left: 3px dashed var(--rosa);
+  padding-left: 1.9rem;
+  margin-left: var(--fio-x);
+  padding-top: 0.2rem;
+}
+
+.secao-vinho .com-fio { border-left-color: color-mix(in srgb, var(--rosa) 70%, var(--claro)); }
+
+.no {
+  position: absolute;
+  left: -0.65rem;
+  top: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--rosa);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--rosa) 22%, transparent);
+}
+
+.no-fim { background: var(--ambar); box-shadow: 0 0 0 5px rgba(232, 161, 61, 0.25); }
+
+/* ---------- seções ---------- */
+
+.secao { padding: 4rem 0 4.5rem; }
+
+.secao-vinho {
+  background: var(--vinho);
+  color: var(--claro);
+}
+
+/* ---------- trajetória ---------- */
+
+.trajetoria {
+  list-style: none;
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.trajetoria li {
+  display: grid;
+  grid-template-columns: 4.2rem 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.traj-ano {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--vinho);
+  background: color-mix(in srgb, var(--rosa) 14%, var(--claro));
+  border: 1px solid color-mix(in srgb, var(--rosa) 35%, transparent);
+  border-radius: 999px;
+  text-align: center;
+  padding: 0.25rem 0.4rem;
+  margin-top: 0.15rem;
+}
+
+.trajetoria h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
+
+.trajetoria p { color: var(--tinta-suave); font-size: 0.95rem; }
+
+/* ---------- propostas ---------- */
+
+.eixo { margin-top: 2.4rem; }
+
+.eixo-titulo {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ambar);
+  margin-bottom: 1rem;
+}
+
+.cartoes {
+  display: grid;
+  gap: 1rem;
+}
+
+.cartao {
+  background: rgba(253, 249, 247, 0.07);
+  border: 1px solid rgba(253, 249, 247, 0.16);
+  border-radius: var(--raio);
+  padding: 1.4rem 1.5rem;
+}
+
+.cartao h4 { font-size: 1.08rem; margin-bottom: 0.4rem; }
+
+.cartao p { font-size: 0.95rem; color: rgba(253, 249, 247, 0.82); }
+
+/* ---------- depoimentos ---------- */
+
+.depoimentos {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.depo {
+  background: var(--claro);
+  border: 1px solid color-mix(in srgb, var(--rosa) 25%, transparent);
+  border-radius: var(--raio);
+  padding: 1.5rem 1.6rem;
+}
+
+.depo p {
+  font-family: var(--fonte-display);
+  font-size: 1.12rem;
+  line-height: 1.4;
+  margin-bottom: 0.9rem;
+}
+
+.depo footer { font-size: 0.88rem; color: var(--tinta-suave); }
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+
+.galeria-item {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--raio);
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--rosa) 30%, var(--papel)), color-mix(in srgb, var(--vinho) 22%, var(--papel)));
+  display: flex;
+  align-items: flex-end;
+  padding: 0.8rem;
+}
+
+.galeria-item figcaption {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--vinho);
+}
+
+/* ---------- formulário ---------- */
+
+.formulario {
+  max-width: 26rem;
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.campo label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.campo input {
+  width: 100%;
+  font: inherit;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(253, 249, 247, 0.35);
+  background: rgba(253, 249, 247, 0.1);
+  color: var(--claro);
+}
+
+.campo input::placeholder { color: rgba(253, 249, 247, 0.45); }
+
+.campo input:focus { outline: 3px solid var(--ambar); outline-offset: 1px; border-color: transparent; }
+
+.campo-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.campo-consentimento {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+  align-items: start;
+  font-size: 0.82rem;
+  color: rgba(253, 249, 247, 0.85);
+}
+
+.campo-consentimento input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.15rem;
+  accent-color: var(--ambar);
+}
+
+.formulario .botao { justify-self: start; }
+
+.form-retorno { font-size: 0.92rem; font-weight: 600; min-height: 1.4em; }
+
+.form-retorno.ok { color: var(--ambar); }
+.form-retorno.erro { color: #ffb4c4; }
+
+/* ---------- rodapé ---------- */
+
+.rodape {
+  background: var(--vinho-escuro);
+  color: var(--claro);
+  padding: 2.5rem 0 6rem;   /* respiro pro CTA fixo no mobile */
+}
+
+.rodape-grade { display: grid; gap: 1.5rem; }
+
+.rodape-nome { font-family: var(--fonte-display); font-size: 1.4rem; }
+
+.rodape-slogan { color: var(--ambar); font-size: 0.95rem; }
+
+.rodape-social { display: flex; gap: 1rem; }
+
+.rodape-social a {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid rgba(253, 249, 247, 0.3);
+  color: var(--claro);
+}
+
+.rodape-social a:hover { background: rgba(253, 249, 247, 0.12); }
+
+.rodape-legal { font-size: 0.78rem; color: rgba(253, 249, 247, 0.6); }
+
+/* ---------- CTA fixo (mobile) ---------- */
+
+.cta-fixo {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  z-index: 50;
+  white-space: nowrap;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.cta-fixo.escondido {
+  opacity: 0;
+  transform: translateX(-50%) translateY(150%);
+  pointer-events: none;
+}
+
+/* ---------- animação de entrada ---------- */
+
+.revela {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.revela.visivel { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .revela { opacity: 1; transform: none; transition: none; }
+  .botao, .cta-fixo { transition: none; }
+}
+
+/* ============================================================
+   Desktop
+   ============================================================ */
+
+@media (min-width: 760px) {
+  .topo { padding: 0.9rem 2rem; }
+  .topo-nav a:not(.topo-cta) { display: inline; }
+
+  .hero { padding: 5.5rem 0 6rem; }
+
+  .hero-grade {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .foto-moldura { width: 100%; max-width: 24rem; margin: 0; justify-self: end; }
+
+  .secao { padding: 5.5rem 0 6rem; }
+
+  .com-fio { padding-left: 2.6rem; }
+
+  .cartoes { grid-template-columns: 1fr 1fr; }
+
+  .depoimentos { grid-template-columns: 1fr 1fr; }
+
+  .galeria { grid-template-columns: repeat(3, 1fr); }
+
+  .trajetoria { max-width: 40rem; }
+
+  .cta-fixo { display: none; }   /* CTA fixo é recurso mobile */
+}
