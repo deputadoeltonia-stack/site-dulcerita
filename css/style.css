@@ -194,7 +194,14 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   margin: 0 auto;
 }
 
-.foto-moldura img { width: 100%; height: 100%; object-fit: cover; }
+/* recorte sem fundo: ela "em pé" na base da moldura, gradiente aparece atrás */
+.foto-moldura img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 12px 24px rgba(43, 33, 38, 0.35));
+}
 
 .foto-fallback {
   display: none;
