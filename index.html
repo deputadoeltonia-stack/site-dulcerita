@@ -26,27 +26,27 @@
 
     <!-- ==================== HERO ==================== -->
     <section class="hero" id="inicio">
-      <div class="miolo hero-grade">
-        <div class="hero-texto">
-          <p class="olho olho-claro">Vereadora · São José dos Campos</p>
-          <h1 class="hero-nome">Dulce<br>Rita</h1>
-          <p class="hero-slogan">Cuidar de perto.</p>
-          <!-- TROCAR: frase de posicionamento real da candidata -->
-          <p class="hero-frase">Uma cidade grande se cuida bairro por bairro. Saúde que atende, escola que acolhe e uma vereadora que conhece a sua rua pelo nome.</p>
+      <div class="hero-brilho" aria-hidden="true"></div>
+      <figure class="hero-retrato">
+        <!-- Foto oficial: recorte sem fundo em public/assets/dulce-rita.webp -->
+        <img src="public/assets/dulce-rita.webp" alt="Foto oficial de Dulce Rita"
+             onerror="this.closest('.hero-retrato').classList.add('sem-foto')">
+      </figure>
+      <div class="miolo hero-conteudo">
+        <p class="olho olho-claro">Vereadora · São José dos Campos</p>
+        <!-- TROCAR: frase de posicionamento real da candidata -->
+        <h1 class="hero-titulo">
+          Uma cidade grande<br>
+          se cuida <em class="marca">de perto</em>,<br>
+          rua por rua.
+        </h1>
+        <p class="hero-frase">Sou a Dulce Rita. Doze anos batendo de porta em porta como agente de saúde me ensinaram que cuidado não é discurso: é aparecer, ouvir e resolver.</p>
+        <div class="hero-acoes">
           <a class="botao botao-ambar" href="#participar">Quero participar</a>
-        </div>
-        <div class="hero-foto">
-          <figure class="foto-moldura">
-            <!-- Foto oficial: recorte sem fundo em public/assets/dulce-rita.webp -->
-            <img src="public/assets/dulce-rita.webp" alt="Foto oficial de Dulce Rita"
-                 onerror="this.closest('.foto-moldura').classList.add('sem-foto')">
-            <span class="foto-fallback" aria-hidden="true">DR</span>
-          </figure>
+          <a class="botao botao-linha" href="#propostas">Ver propostas</a>
         </div>
       </div>
     </section>
-
-    <div class="fio" aria-hidden="true"></div>
 
     <!-- ==================== QUEM SOU EU ==================== -->
     <section class="secao" id="quem-sou">
@@ -54,10 +54,12 @@
         <span class="no" aria-hidden="true"></span>
         <p class="olho">Quem sou eu</p>
         <h2>Nascida aqui. Criada aqui.<br>Trabalhando por aqui.</h2>
+        <div class="bio-grade">
         <!-- TROCAR: biografia real -->
         <div class="prosa">
-          <p>Dulce Rita cresceu na zona sul de São José dos Campos, filha de costureira e de motorista de ônibus. Aprendeu cedo que cuidado não é discurso: é aparecer, ouvir e resolver. Foi agente comunitária de saúde por doze anos, andando as mesmas ruas onde hoje pede seu voto.</p>
-          <p>Da UBS ao conselho de escola, da associação de bairro ao mutirão de sábado, a trajetória dela sempre foi a mesma: perto das pessoas. Agora, quer levar essa forma de trabalhar para a Câmara Municipal.</p>
+          <p class="prosa-abre">Dulce Rita cresceu na zona sul de São José dos Campos, filha de costureira e de motorista de ônibus. Aprendeu cedo que cuidado não é discurso: é aparecer, ouvir e resolver.</p>
+          <p>Foi agente comunitária de saúde por doze anos, andando as mesmas ruas onde hoje pede seu voto. Da UBS ao conselho de escola, da associação de bairro ao mutirão de sábado, a trajetória dela sempre foi a mesma: perto das pessoas.</p>
+          <p>Agora, quer levar essa forma de trabalhar para a Câmara Municipal.</p>
         </div>
 
         <ol class="trajetoria">
@@ -83,6 +85,7 @@
             <div><h3>Candidata a vereadora</h3><p>A experiência de quem cuida, agora com mandato para cuidar da cidade inteira.</p></div>
           </li>
         </ol>
+        </div>
       </div>
     </section>
 
@@ -93,6 +96,7 @@
         <p class="olho olho-claro">Propostas</p>
         <h2>O que a Dulce vai fazer<br>na Câmara</h2>
         <!-- TROCAR: propostas reais. 3 eixos × 2 cards -->
+        <div class="eixos">
         <div class="eixo">
           <h3 class="eixo-titulo">Saúde e cuidado</h3>
           <div class="cartoes">
@@ -131,6 +135,7 @@
               <p>Rever linhas e horários com quem usa: audiências itinerantes de transporte nos bairros.</p>
             </article>
           </div>
+        </div>
         </div>
       </div>
     </section>
@@ -178,8 +183,11 @@
       <div class="miolo com-fio">
         <span class="no no-fim" aria-hidden="true"></span>
         <p class="olho olho-claro">Quero participar</p>
-        <h2>Entre para a rede<br>da Dulce</h2>
-        <p class="prosa-clara">Deixe seu nome e telefone. A equipe entra em contato para você receber novidades e participar da campanha no seu bairro.</p>
+        <div class="participar-grade">
+        <div>
+          <h2>Entre para a rede<br>da Dulce</h2>
+          <p class="prosa-clara">Deixe seu nome e telefone. A equipe entra em contato para você receber novidades e participar da campanha no seu bairro.</p>
+        </div>
 
         <form id="form-lead" class="formulario" novalidate>
           <div class="campo">
@@ -202,6 +210,7 @@
           <button type="submit" class="botao botao-ambar">Quero participar</button>
           <p class="form-retorno" id="form-retorno" role="status" aria-live="polite"></p>
         </form>
+        </div>
       </div>
     </section>
   </main>

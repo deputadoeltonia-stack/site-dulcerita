@@ -147,115 +147,171 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 /* nav completa só no desktop */
 .topo-nav a:not(.topo-cta) { display: none; }
 
-/* ---------- hero ---------- */
+/* ---------- hero (cinematográfico) ---------- */
 
 .hero {
-  background:
-    radial-gradient(90rem 40rem at 85% -10%, rgba(201, 85, 124, 0.35), transparent 60%),
-    var(--vinho);
-  color: var(--claro);
-  padding: 4rem 0 4.5rem;
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-start;   /* mobile: texto no topo, foto ocupa a base */
   overflow: hidden;
+  color: var(--claro);
+  background:
+    radial-gradient(70% 55% at 72% 42%, rgba(201, 85, 124, 0.42), transparent 68%),
+    linear-gradient(185deg, #7a2342 0%, var(--vinho) 38%, var(--vinho-escuro) 100%);
+  /* base reservada pra foto: no mobile ela não invade o texto nem os botões */
+  padding: 5.5rem 0 44svh;
 }
 
-.hero-grade {
-  display: grid;
-  gap: 2.5rem;
+/* camadas do hero: brilho (1) → retrato (2) → vinheta (3) → conteúdo (4) */
+.hero-brilho {
+  position: absolute;
+  z-index: 1;
+  right: -18%;
+  bottom: 0;
+  width: 115vw;
+  height: 78vh;
+  background: radial-gradient(closest-side, rgba(232, 161, 61, 0.28), rgba(201, 85, 124, 0.18) 45%, transparent 72%);
+  pointer-events: none;
 }
 
-.hero-nome {
-  font-size: clamp(4rem, 17vw, 8.5rem);
-  line-height: 0.92;
-  margin: 0.4rem 0 0.8rem;
+/* vinheta: escurece bordas, puxa o olho pro centro */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 85% at 50% 45%, transparent 42%, rgba(30, 8, 18, 0.55) 100%),
+    linear-gradient(to top, rgba(30, 8, 18, 0.75) 0%, transparent 42%);
 }
 
-.hero-slogan {
-  font-family: var(--fonte-display);
-  font-size: clamp(1.5rem, 5vw, 2.2rem);
-  color: var(--ambar);
-  margin-bottom: 1.1rem;
+/* altura em svh (não em %) — a foto não cresce junto com o conteúdo do hero */
+.hero-retrato {
+  position: absolute;
+  z-index: 2;
+  right: -8vw;
+  bottom: 0;
+  height: 46svh;
+  pointer-events: none;
+}
+
+.hero-retrato img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom right;
+  filter: drop-shadow(-18px 10px 40px rgba(30, 8, 18, 0.5)) contrast(1.04) saturate(1.02);
+  /* pés se dissolvem no fundo em vez de cortar reto */
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 14%);
+  mask-image: linear-gradient(to top, transparent 0%, #000 14%);
+}
+
+.sem-foto { display: none; }
+
+.hero-conteudo { position: relative; z-index: 4; width: 100%; }
+
+.hero-titulo {
+  /* limitado pela largura E pela altura: nunca empurra o CTA pra fora da dobra */
+  font-size: clamp(2.1rem, min(7.5vw, 7.2svh), 4.6rem);
+  line-height: 1.04;
+  margin: 0.6rem 0 1.2rem;
+  text-wrap: balance;
+}
+
+/* marcador: destaque pintado atrás da palavra-chave */
+.marca {
+  font-style: normal;
+  position: relative;
+  white-space: nowrap;
+}
+
+.marca::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.12em;
+  right: -0.12em;
+  bottom: 0.06em;
+  height: 0.42em;
+  background: var(--ambar);
+  opacity: 0.85;
+  transform: skewX(-3deg);
 }
 
 .hero-frase {
-  max-width: 30rem;
-  color: rgba(253, 249, 247, 0.85);
+  max-width: 33rem;
+  font-size: 1.05rem;
+  color: rgba(253, 249, 247, 0.82);
   margin-bottom: 2rem;
+  text-shadow: 0 1px 12px rgba(30, 8, 18, 0.5);
 }
 
-.foto-moldura {
-  position: relative;
-  width: min(78vw, 22rem);
-  aspect-ratio: 4 / 5;
-  border-radius: var(--raio);
-  overflow: hidden;
-  background: linear-gradient(160deg, var(--rosa), var(--vinho-escuro));
-  outline: 2px dashed rgba(253, 249, 247, 0.5);
-  outline-offset: 8px;
-  margin: 0 auto;
+.hero-acoes { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+.botao-linha {
+  border: 1px solid rgba(253, 249, 247, 0.4);
+  color: var(--claro);
+  background: rgba(253, 249, 247, 0.06);
+  backdrop-filter: blur(4px);
 }
 
-/* recorte sem fundo: ela "em pé" na base da moldura, gradiente aparece atrás */
-.foto-moldura img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: bottom center;
-  filter: drop-shadow(0 12px 24px rgba(43, 33, 38, 0.35));
-}
-
-.foto-fallback {
-  display: none;
-  position: absolute;
-  inset: 0;
-  place-items: center;
-  font-family: var(--fonte-display);
-  font-size: 6rem;
-  color: rgba(253, 249, 247, 0.85);
-}
-
-.sem-foto img { display: none; }
-.sem-foto .foto-fallback { display: grid; }
-
-/* ---------- fio (assinatura) ---------- */
-
-.fio {
-  height: 3.5rem;
-  max-width: var(--miolo);
-  margin: 0 auto;
-  border-left: 3px dashed var(--rosa);
-  margin-left: max(calc((100vw - var(--miolo)) / 2 + var(--fio-x)), var(--fio-x));
-}
+.botao-linha:hover { background: rgba(253, 249, 247, 0.14); transform: translateY(-2px); }
 
 .com-fio {
   position: relative;
-  border-left: 3px dashed var(--rosa);
   padding-left: 1.9rem;
   margin-left: var(--fio-x);
   padding-top: 0.2rem;
 }
 
-.secao-vinho .com-fio { border-left-color: color-mix(in srgb, var(--rosa) 70%, var(--claro)); }
+/* fio: linha fina que nasce forte no nó e se dissolve — costura as seções */
+.com-fio::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3rem;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--rosa), color-mix(in srgb, var(--rosa) 20%, transparent) 88%, transparent);
+}
+
+.secao-vinho .com-fio::before {
+  background: linear-gradient(to bottom, var(--ambar), rgba(232, 161, 61, 0.12) 88%, transparent);
+}
 
 .no {
   position: absolute;
-  left: -0.65rem;
+  left: -0.28rem;
   top: 0;
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 0.62rem;
+  height: 0.62rem;
   border-radius: 50%;
   background: var(--rosa);
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--rosa) 22%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--rosa) 18%, transparent), 0 0 16px 2px color-mix(in srgb, var(--rosa) 60%, transparent);
 }
 
-.no-fim { background: var(--ambar); box-shadow: 0 0 0 5px rgba(232, 161, 61, 0.25); }
+.secao-vinho .no { background: var(--ambar); box-shadow: 0 0 0 4px rgba(232, 161, 61, 0.2), 0 0 20px 3px rgba(232, 161, 61, 0.55); }
 
 /* ---------- seções ---------- */
 
 .secao { padding: 4rem 0 4.5rem; }
 
 .secao-vinho {
-  background: var(--vinho);
   color: var(--claro);
+  background:
+    radial-gradient(80% 60% at 20% 0%, rgba(201, 85, 124, 0.28), transparent 70%),
+    linear-gradient(180deg, var(--vinho) 0%, var(--vinho-escuro) 100%);
+}
+
+.bio-grade { display: grid; gap: 2.5rem; }
+
+.prosa-abre {
+  font-family: var(--fonte-display);
+  font-size: clamp(1.2rem, 3.2vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--vinho);
 }
 
 /* ---------- trajetória ---------- */
@@ -292,7 +348,9 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 
 /* ---------- propostas ---------- */
 
-.eixo { margin-top: 2.4rem; }
+.eixos { display: grid; gap: 2.4rem; }
+
+.eixo { margin-top: 0; }
 
 .eixo-titulo {
   font-size: 0.85rem;
@@ -309,10 +367,17 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 }
 
 .cartao {
-  background: rgba(253, 249, 247, 0.07);
-  border: 1px solid rgba(253, 249, 247, 0.16);
+  background: linear-gradient(160deg, rgba(253, 249, 247, 0.11), rgba(253, 249, 247, 0.04));
+  border: 1px solid rgba(253, 249, 247, 0.14);
   border-radius: var(--raio);
-  padding: 1.4rem 1.5rem;
+  padding: 1.5rem 1.6rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.cartao:hover {
+  transform: translateY(-4px);
+  border-color: rgba(232, 161, 61, 0.55);
+  background: linear-gradient(160deg, rgba(253, 249, 247, 0.16), rgba(253, 249, 247, 0.05));
 }
 
 .cartao h4 { font-size: 1.08rem; margin-bottom: 0.4rem; }
@@ -357,6 +422,12 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   display: flex;
   align-items: flex-end;
   padding: 0.8rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(109, 31, 58, 0.22);
 }
 
 .galeria-item figcaption {
@@ -367,8 +438,10 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 
 /* ---------- formulário ---------- */
 
+.participar-grade { display: grid; gap: 2rem; }
+
 .formulario {
-  max-width: 26rem;
+  max-width: 28rem;
   display: grid;
   gap: 1.1rem;
   margin-top: 0.5rem;
@@ -492,27 +565,43 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   .topo { padding: 0.9rem 2rem; }
   .topo-nav a:not(.topo-cta) { display: inline; }
 
-  .hero { padding: 5.5rem 0 6rem; }
-
-  .hero-grade {
-    grid-template-columns: 1.2fr 0.8fr;
+  .hero {
     align-items: center;
-    gap: 3rem;
+    padding: 8rem 0 6rem;
   }
 
-  .foto-moldura { width: 100%; max-width: 24rem; margin: 0; justify-self: end; }
+  .hero-retrato { height: min(86svh, 42rem); right: max(1vw, calc((100vw - var(--miolo)) / 2 - 4rem)); }
+
+  .hero-retrato img {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  /* texto ocupa a metade esquerda; foto nunca invade a coluna */
+  .hero-conteudo { max-width: min(44rem, 52%); }
+
+  .hero-brilho { right: 2%; width: 55vw; height: 88svh; }
 
   .secao { padding: 5.5rem 0 6rem; }
 
   .com-fio { padding-left: 2.6rem; }
 
-  .cartoes { grid-template-columns: 1fr 1fr; }
+  /* 3 eixos lado a lado, cards empilhados dentro de cada um */
+  .eixos { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
 
   .depoimentos { grid-template-columns: 1fr 1fr; }
 
   .galeria { grid-template-columns: repeat(3, 1fr); }
 
-  .trajetoria { max-width: 40rem; }
+  /* bio à esquerda, linha do tempo à direita */
+  .bio-grade { grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
+
+  /* convite à esquerda, formulário à direita */
+  .participar-grade { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+
+  .formulario { margin-top: 0; }
+
+  .trajetoria { margin-top: 0; }
 
   .cta-fixo { display: none; }   /* CTA fixo é recurso mobile */
 }

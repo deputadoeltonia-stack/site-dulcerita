@@ -89,6 +89,7 @@
     ).observe(secaoForm);
 
     /* ---------- revelação suave das seções ---------- */
+    // threshold 0: blocos mais altos que a viewport nunca atingiriam uma fração fixa
     const revelador = new IntersectionObserver(
       function (entradas, obs) {
         entradas.forEach(function (e) {
@@ -98,7 +99,7 @@
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
 
     document
