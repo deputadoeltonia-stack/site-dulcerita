@@ -154,7 +154,9 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   min-height: 100svh;
   display: flex;
   align-items: flex-start;   /* mobile: texto no topo, foto ocupa a base */
-  overflow: hidden;
+  /* clip, não hidden: hidden viraria scroll container e quebraria
+     sticky/animation-timeline dos descendentes (gotcha conhecido) */
+  overflow: clip;
   color: var(--claro);
   background:
     radial-gradient(70% 55% at 72% 42%, rgba(201, 85, 124, 0.42), transparent 68%),
@@ -173,6 +175,14 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   height: 78vh;
   background: radial-gradient(closest-side, rgba(232, 161, 61, 0.28), rgba(201, 85, 124, 0.18) 45%, transparent 72%);
   pointer-events: none;
+  /* respiração ambiente: só opacidade, base = frame `from` (sem salto) */
+  opacity: 0.68;
+  animation: halo-respira 6.5s ease-in-out infinite alternate;
+}
+
+@keyframes halo-respira {
+  from { opacity: 0.68; }
+  to   { opacity: 1; }
 }
 
 /* vinheta: escurece bordas, puxa o olho pro centro */
@@ -238,6 +248,41 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   background: var(--ambar);
   opacity: 0.85;
   transform: skewX(-3deg);
+  transform-origin: 0 50%;
+  /* fill both: durante o delay vale o frame `from` (scaleX 0), sem pulo */
+  animation: marca-desenha 0.85s cubic-bezier(0.25, 1, 0.5, 1) 0.9s both;
+}
+
+@keyframes marca-desenha {
+  from { transform: skewX(-3deg) scaleX(0); }
+  to   { transform: skewX(-3deg) scaleX(1); }
+}
+
+/* brilho diagonal varrendo a marca — ::after pinta DEPOIS do ::before
+   (fica acima do âmbar) e z-index -1 mantém abaixo do texto */
+.marca::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.12em;
+  right: -0.12em;
+  bottom: 0.06em;
+  height: 0.42em;
+  transform: skewX(-3deg);
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 32%, rgba(255, 250, 244, 0.6) 50%, transparent 68%) no-repeat;
+  background-size: 55% 100%;
+  /* base = frame 0% da animação: fora do quadro, sem lasca antes do delay */
+  background-position: -150% 0;
+  animation: marca-brilho 5s linear 2.2s infinite;
+}
+
+/* com size 55%, o brilho só sai do quadro fora de [-122%, 222%] —
+   endpoints -150%/260% garantem sumiço total e retorno sem teleporte */
+@keyframes marca-brilho {
+  0%   { background-position: -150% 0; }
+  26%  { background-position: 260% 0; }
+  100% { background-position: 260% 0; }
 }
 
 .hero-frase {
@@ -541,6 +586,78 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   pointer-events: none;
 }
 
+/* ---------- scroll-driven (só browsers com suporte; fora do @supports
+   um browser antigo rodaria com duração 0s e congelaria no estado final) ---------- */
+
+@supports (animation-timeline: view()) {
+
+  /* régua de leitura: linha âmbar sob o header preenchendo com o scroll.
+     Scroll-linked 1:1 com o gesto do usuário — deliberadamente sem gate
+     de reduced-motion (não é movimento autônomo). */
+  .topo::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--ambar);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    /* scroll(root) explícito: não herdar scroller errado de ancestral */
+    animation: regua-leitura linear both;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes regua-leitura {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* cards empilhando — SÓ MOBILE. Decisão: empilham os 3 .eixo (capítulos
+     coerentes: título + 2 cartões); no desktop os eixos são colunas
+     lado a lado, empilhar não se aplica. Nunca os dois níveis. */
+  @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
+    .eixos {
+      view-timeline: --eixos block;
+    }
+
+    .eixos > .eixo {
+      position: sticky;
+      /* fundo próprio: os cartões são translúcidos, sem isto o eixo
+         de baixo vazaria através do de cima durante o empilhamento */
+      background: linear-gradient(175deg, #6a1f38, #591631);
+      border-radius: var(--raio);
+      padding: 1.2rem 1.1rem;
+      box-shadow: 0 -10px 30px rgba(30, 8, 18, 0.35);
+      transform-origin: 50% 0;
+    }
+
+    /* 3 eixos → fator 0.05: fim de curso 0.90/0.95/1, sem miniatura */
+    .eixos > .eixo:nth-child(1) {
+      top: 4.4rem;
+      animation: eixo-encolhe linear both;
+      animation-timeline: --eixos;
+      animation-range: cover 22% cover 52%;
+      --escala-alvo: 0.90;
+    }
+
+    .eixos > .eixo:nth-child(2) {
+      top: 5.7rem;
+      animation: eixo-encolhe linear both;
+      animation-timeline: --eixos;
+      animation-range: cover 48% cover 78%;
+      --escala-alvo: 0.95;
+    }
+
+    .eixos > .eixo:nth-child(3) { top: 7rem; }
+
+    @keyframes eixo-encolhe {
+      to { transform: scale(var(--escala-alvo, 0.95)); }
+    }
+  }
+}
+
 /* ---------- animação de entrada ---------- */
 
 .revela {
@@ -556,6 +673,10 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   .revela { opacity: 1; transform: none; transition: none; }
   .botao, .cta-fixo, .cartao, .galeria-item { transition: none; }
   .cartao:hover, .galeria-item:hover { transform: none; }
+  /* marca: sem desenho de entrada; barra estática cheia (estado base).
+     Brilho da marca e respiração do halo ficam de propósito: micro-vida
+     de opacidade/brilho, sem transform — decisão deliberada. */
+  .marca::before { animation: none; }
 }
 
 /* ============================================================

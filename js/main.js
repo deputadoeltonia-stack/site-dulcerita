@@ -102,11 +102,21 @@
       { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
 
+    // #propostas .miolo fica de fora: transform de ancestral quebraria o
+    // position:sticky dos eixos que empilham no mobile
     document
-      .querySelectorAll(".secao .miolo, .depo, .cartao")
+      .querySelectorAll(".secao:not(#propostas) .miolo, .depo, .cartao")
       .forEach(function (el) {
         el.classList.add("revela");
         revelador.observe(el);
       });
+
+    // failsafe: reveal nunca pode ser o que torna o conteúdo visível;
+    // se o observer não disparar, tudo aparece mesmo assim
+    setTimeout(function () {
+      document.querySelectorAll(".revela").forEach(function (el) {
+        el.classList.add("visivel");
+      });
+    }, 3000);
   }
 })();
