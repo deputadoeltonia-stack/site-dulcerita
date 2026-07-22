@@ -68,7 +68,7 @@ def og():
     # eyebrow tracked manualmente (PIL não tem letter-spacing)
     f_eb = archivo_b(20)
     ex, ey = x, 150
-    for ch in "VEREADORA · SÃO JOSÉ DOS CAMPOS":
+    for ch in "PRÉ-CANDIDATA A DEPUTADA ESTADUAL":
         d.text((ex, ey), ch, font=f_eb, fill=AMBAR)
         ex += d.textlength(ch, font=f_eb) + 3.2
 
@@ -78,9 +78,9 @@ def og():
     # slogan com a barra âmbar (assinatura da marca)
     f_sl = gloock(52)
     sy = 486
-    larg = d.textlength("Cuidar de perto.", font=f_sl)
+    larg = d.textlength("Sempre com você.", font=f_sl)
     d.rectangle([x - 8, sy + 34, x + larg + 8, sy + 60], fill=AMBAR)
-    d.text((x, sy), "Cuidar de perto.", font=f_sl, fill=CLARO)
+    d.text((x, sy), "Sempre com você.", font=f_sl, fill=CLARO)
 
     img.save(f"{OUT}/og-image.jpg", quality=88, optimize=True)
     print("og-image.jpg", img.size)

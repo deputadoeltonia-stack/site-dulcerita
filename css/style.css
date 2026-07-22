@@ -21,6 +21,10 @@
   --miolo: 68rem;
   --fio-x: 1.1rem;         /* distância do fio até a borda do miolo */
   --raio: 14px;
+  /* altura do header. O .topo é sticky e fica no fluxo, então empurra o
+     hero pra baixo: sem descontar isso o hero de 100svh sobra fora da
+     dobra e corta a foto. .topo tem min-height igual, pra não mentir. */
+  --topo-h: 4rem;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -109,6 +113,7 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   position: sticky;
   top: 0;
   z-index: 40;
+  min-height: var(--topo-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -151,9 +156,12 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 
 .hero {
   position: relative;
-  min-height: 100svh;
+  min-height: calc(100svh - var(--topo-h));
+  /* Mobile: coluna. O texto ocupa o que precisa e a foto fica com o resto
+     exato da dobra. Reservar espaço com padding fixo não funcionava: bastava
+     o título ganhar uma linha pra foto cair fora da tela. */
   display: flex;
-  align-items: flex-start;   /* mobile: texto no topo, foto ocupa a base */
+  flex-direction: column;
   /* clip, não hidden: hidden viraria scroll container e quebraria
      sticky/animation-timeline dos descendentes (gotcha conhecido) */
   overflow: clip;
@@ -161,9 +169,13 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   background:
     radial-gradient(70% 55% at 72% 42%, rgba(201, 85, 124, 0.42), transparent 68%),
     linear-gradient(185deg, #7a2342 0%, var(--vinho) 38%, var(--vinho-escuro) 100%);
-  /* base reservada pra foto: no mobile ela não invade o texto nem os botões */
-  padding: 5.5rem 0 44svh;
+  padding: 2.5rem 0 0;
 }
+
+/* No mobile as quebras manuais do título gastam uma linha a mais e empurram
+   a foto pra fora da dobra. Deixa o texto quebrar sozinho; a partir de 760px
+   a largura comporta as quebras desenhadas. */
+.hero-titulo br { display: none; }
 
 /* camadas do hero: brilho (1) → retrato (2) → vinheta (3) → conteúdo (4) */
 .hero-brilho {
@@ -197,19 +209,24 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
     linear-gradient(to top, rgba(30, 8, 18, 0.75) 0%, transparent 42%);
 }
 
-/* altura em svh (não em %) — a foto não cresce junto com o conteúdo do hero */
+/* mobile: item do flex, fica com a sobra da dobra (min-height é o piso
+   pra ela não sumir em tela muito baixa) */
 .hero-retrato {
-  position: absolute;
+  order: 2;
+  /* base 0, não auto: com auto a base vira a altura natural da imagem
+     (644px) e o hero estica além da dobra. Com 0 ela fica só com a sobra. */
+  flex: 1 1 0;
+  min-height: 8rem;
+  position: relative;
   z-index: 2;
-  right: -8vw;
-  bottom: 0;
-  height: 46svh;
+  margin-right: -8vw;
   pointer-events: none;
 }
 
 .hero-retrato img {
   height: 100%;
   width: auto;
+  margin-left: auto;   /* encosta na direita */
   object-fit: contain;
   object-position: bottom right;
   filter: drop-shadow(-18px 10px 40px rgba(30, 8, 18, 0.5)) contrast(1.04) saturate(1.02);
@@ -220,7 +237,7 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 
 .sem-foto { display: none; }
 
-.hero-conteudo { position: relative; z-index: 4; width: 100%; }
+.hero-conteudo { order: 1; flex: 0 0 auto; position: relative; z-index: 4; width: 100%; }
 
 .hero-titulo {
   /* limitado pela largura E pela altura: nunca empurra o CTA pra fora da dobra */
@@ -425,9 +442,65 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   background: linear-gradient(160deg, rgba(253, 249, 247, 0.16), rgba(253, 249, 247, 0.05));
 }
 
-.cartao h4 { font-size: 1.08rem; margin-bottom: 0.4rem; }
+.cartao h4 {
+  font-family: var(--fonte-display);
+  font-weight: 400;
+  font-size: 1.22rem;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  color: var(--claro);
+}
 
 .cartao p { font-size: 0.95rem; color: rgba(253, 249, 247, 0.82); }
+
+/* prioridades: marcador âmbar desenhado, sem bullet do browser */
+.prioridades {
+  list-style: none;
+  margin-top: 1.1rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.prioridades li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.93rem;
+  color: rgba(253, 249, 247, 0.9);
+  line-height: 1.45;
+}
+
+.prioridades li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.5rem;
+  height: 2px;
+  background: var(--ambar);
+}
+
+/* citação dela dentro da bio */
+.citacao {
+  margin-top: 1.8rem;
+  padding-left: 1.2rem;
+  border-left: 2px solid var(--rosa);
+}
+
+.citacao p {
+  font-family: var(--fonte-display);
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--vinho);
+  margin-bottom: 0.6rem;
+}
+
+.citacao footer {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--tinta-suave);
+}
 
 /* ---------- depoimentos ---------- */
 
@@ -684,15 +757,32 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
    ============================================================ */
 
 @media (min-width: 760px) {
+  /* padding maior aqui deixa o header 2.7px mais alto: sem acertar a
+     variável o hero passa da dobra e aparece um resíduo de scroll */
+  :root { --topo-h: 4.17rem; }
+
   .topo { padding: 0.9rem 2rem; }
   .topo-nav a:not(.topo-cta) { display: inline; }
+
+  .hero-titulo br { display: inline; }
 
   .secao { padding: 5.5rem 0 6rem; }
 
   .com-fio { padding-left: 2.6rem; }
 
   /* 3 eixos lado a lado, cards empilhados dentro de cada um */
-  .eixos { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .eixos { grid-template-columns: repeat(3, 1fr); gap: 2rem; grid-template-rows: auto 1fr; }
+
+  /* Títulos de 1 e de 2 linhas convivem. Com subgrid os três eixos
+     dividem as mesmas faixas, então os cards alinham por mais que o
+     título quebre — sem depender de min-height chutado. */
+  .eixo { display: grid; grid-row: span 2; grid-template-rows: subgrid; }
+  .eixo .cartoes, .eixo .cartao { height: 100%; }
+
+  @supports not (grid-template-rows: subgrid) {
+    .eixo { grid-row: auto; grid-template-rows: auto 1fr; }
+    .eixo-titulo { min-height: 3.2em; }
+  }
 
   .depoimentos { grid-template-columns: 1fr 1fr; }
 
@@ -719,14 +809,23 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 
 @media (min-width: 900px) {
   .hero {
+    flex-direction: row;
     align-items: center;
     padding: 8rem 0 6rem;
   }
 
+  /* desktop: sai do fluxo e volta a sangrar pela direita, atrás do texto */
   .hero-retrato {
+    position: absolute;
+    flex: none;
+    min-height: 0;
+    margin-right: 0;
+    bottom: 0;
     height: min(86svh, 42rem);
     right: max(1vw, calc((100vw - var(--miolo)) / 2 - 4rem));
   }
+
+  .hero-retrato img { margin-left: 0; }
 
   .hero-retrato img {
     -webkit-mask-image: none;
