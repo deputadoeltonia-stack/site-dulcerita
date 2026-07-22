@@ -223,9 +223,14 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   pointer-events: none;
 }
 
+/* No empilhado a foto é dimensionada pela LARGURA, não pela altura: como a
+   proporção é 0.41, caber inteira na sobra vertical a reduzia a ~110px de
+   largura. Assim ela tem presença e o rodapé do vestido é cortado pela
+   dobra (o .hero tem overflow: clip), que é como retrato de hero funciona. */
 .hero-retrato img {
-  height: 100%;
-  width: auto;
+  width: min(62vw, 20rem);   /* teto: sem ele domina a tela no tablet */
+  max-width: none;
+  height: auto;
   margin-left: auto;   /* encosta na direita */
   object-fit: contain;
   object-position: bottom right;
@@ -821,11 +826,15 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
     min-height: 0;
     margin-right: 0;
     bottom: 0;
-    height: min(86svh, 42rem);
+    /* foto nova é de corpo inteiro (proporção 0.41 contra 0.63 da antiga):
+       na mesma altura ela fica bem mais estreita, então sobe o teto pra
+       recuperar presença sem cortar a cabeça no topo do hero */
+    height: min(92svh, 46rem);
     right: max(1vw, calc((100vw - var(--miolo)) / 2 - 4rem));
   }
 
-  .hero-retrato img { margin-left: 0; }
+  /* desktop: volta a ser dimensionada pela altura */
+  .hero-retrato img { width: auto; height: 100%; margin-left: 0; }
 
   .hero-retrato img {
     -webkit-mask-image: none;
@@ -835,9 +844,11 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   /* O bloco segue a largura do miolo, alinhado com as outras seções.
      Limitar o bloco (e não o texto) o centralizaria pelo margin auto
      do .miolo, empurrando as linhas por cima da foto. */
-  .hero-titulo { max-width: min(38rem, 48%); }
-  .hero-frase { max-width: min(33rem, 48%); }
-  .hero-acoes { max-width: 48%; }
+  /* teto de 56% (era 48%): a foto nova é mais estreita e libera coluna
+     pro texto, fechando o vão que abria no meio da composição */
+  .hero-titulo { max-width: min(38rem, 56%); }
+  .hero-frase { max-width: min(33rem, 56%); }
+  .hero-acoes { max-width: 56%; }
 
   /* A coluna de texto para em ~48%, mas o vw continua crescendo: sem um
      teto menor a manchete estoura a coluna e quebra em 5 linhas. */
