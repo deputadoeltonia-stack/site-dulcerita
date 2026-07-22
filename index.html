@@ -5,10 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dulce Rita — Vereadora por São José dos Campos</title>
   <meta name="description" content="Dulce Rita, candidata a vereadora em São José dos Campos. Cuidar de perto: saúde, educação e o bairro de cada um.">
+  <meta name="theme-color" content="#6d1f3a">
+
+  <!-- Prévia ao compartilhar (WhatsApp, Instagram, Facebook).
+       TROCAR og:url e twitter:image pela URL real após o deploy —
+       redes sociais exigem URL absoluta, caminho relativo não funciona. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Dulce Rita">
+  <meta property="og:title" content="Dulce Rita — Vereadora por São José dos Campos">
+  <meta property="og:description" content="Cuidar de perto: saúde que atende, escola que acolhe e uma vereadora que conhece a sua rua pelo nome.">
+  <meta property="og:url" content="https://dulcerita.netlify.app/">
+  <meta property="og:image" content="https://dulcerita.netlify.app/public/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dulce Rita, vereadora por São José dos Campos. Cuidar de perto.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dulce Rita — Vereadora por São José dos Campos">
+  <meta name="twitter:description" content="Cuidar de perto: saúde que atende, escola que acolhe e uma vereadora que conhece a sua rua pelo nome.">
+  <meta name="twitter:image" content="https://dulcerita.netlify.app/public/assets/og-image.jpg">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="public/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="public/assets/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <!-- foto do hero é o LCP: buscar cedo, não esperar o CSS resolver -->
+  <link rel="preload" as="image" href="public/assets/dulce-rita.webp" fetchpriority="high">
 </head>
 <body>
 
@@ -29,7 +54,8 @@
       <div class="hero-brilho" aria-hidden="true"></div>
       <figure class="hero-retrato">
         <!-- Foto oficial: recorte sem fundo em public/assets/dulce-rita.webp -->
-        <img src="public/assets/dulce-rita.webp" alt="Foto oficial de Dulce Rita"
+        <img src="public/assets/dulce-rita.webp" alt="Dulce Rita, candidata a vereadora por São José dos Campos"
+             width="880" height="1400" fetchpriority="high" decoding="async"
              onerror="this.closest('.hero-retrato').classList.add('sem-foto')">
       </figure>
       <div class="miolo hero-conteudo">

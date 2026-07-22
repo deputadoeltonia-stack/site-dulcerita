@@ -687,23 +687,6 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   .topo { padding: 0.9rem 2rem; }
   .topo-nav a:not(.topo-cta) { display: inline; }
 
-  .hero {
-    align-items: center;
-    padding: 8rem 0 6rem;
-  }
-
-  .hero-retrato { height: min(86svh, 42rem); right: max(1vw, calc((100vw - var(--miolo)) / 2 - 4rem)); }
-
-  .hero-retrato img {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  /* texto ocupa a metade esquerda; foto nunca invade a coluna */
-  .hero-conteudo { max-width: min(44rem, 52%); }
-
-  .hero-brilho { right: 2%; width: 55vw; height: 88svh; }
-
   .secao { padding: 5.5rem 0 6rem; }
 
   .com-fio { padding-left: 2.6rem; }
@@ -726,4 +709,40 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   .trajetoria { margin-top: 0; }
 
   .cta-fixo { display: none; }   /* CTA fixo é recurso mobile */
+}
+
+/* ============================================================
+   Hero lado a lado — só quando há largura real pra isso.
+   Entre 760 e 899 o hero mantém o empilhado do mobile: nessa
+   faixa a foto e o texto disputam a mesma coluna e colidem.
+   ============================================================ */
+
+@media (min-width: 900px) {
+  .hero {
+    align-items: center;
+    padding: 8rem 0 6rem;
+  }
+
+  .hero-retrato {
+    height: min(86svh, 42rem);
+    right: max(1vw, calc((100vw - var(--miolo)) / 2 - 4rem));
+  }
+
+  .hero-retrato img {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  /* O bloco segue a largura do miolo, alinhado com as outras seções.
+     Limitar o bloco (e não o texto) o centralizaria pelo margin auto
+     do .miolo, empurrando as linhas por cima da foto. */
+  .hero-titulo { max-width: min(38rem, 48%); }
+  .hero-frase { max-width: min(33rem, 48%); }
+  .hero-acoes { max-width: 48%; }
+
+  /* A coluna de texto para em ~48%, mas o vw continua crescendo: sem um
+     teto menor a manchete estoura a coluna e quebra em 5 linhas. */
+  .hero-titulo { font-size: clamp(2.4rem, 4.6vw, 3.5rem); }
+
+  .hero-brilho { right: 2%; width: 55vw; height: 88svh; }
 }
