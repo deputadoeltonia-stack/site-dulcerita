@@ -538,26 +538,50 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 }
 
 .galeria-item {
+  position: relative;
   aspect-ratio: 4 / 3;
   border-radius: var(--raio);
-  background:
-    linear-gradient(160deg, color-mix(in srgb, var(--rosa) 30%, var(--papel)), color-mix(in srgb, var(--vinho) 22%, var(--papel)));
+  overflow: hidden;
   display: flex;
   align-items: flex-end;
   padding: 0.8rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.galeria-item:hover {
-  transform: scale(1.02);
-  box-shadow: 0 12px 30px rgba(109, 31, 58, 0.22);
+.galeria-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;   /* prioriza rostos ao cortar retratos */
+}
+
+/* véu na base: legenda clara legível sobre qualquer foto */
+.galeria-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(30, 8, 18, 0.82) 0%, rgba(30, 8, 18, 0.28) 28%, transparent 52%);
+  transition: opacity 0.3s ease;
 }
 
 .galeria-item figcaption {
-  font-size: 0.78rem;
+  position: relative;   /* acima do véu */
+  z-index: 1;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--vinho);
+  color: var(--claro);
+  text-shadow: 0 1px 6px rgba(30, 8, 18, 0.6);
 }
+
+.galeria-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(109, 31, 58, 0.28);
+}
+
+.galeria-item:hover img { transform: scale(1.04); }
+.galeria-item img { transition: transform 0.4s ease; }
 
 /* ---------- formulário ---------- */
 
@@ -749,8 +773,8 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .revela { opacity: 1; transform: none; transition: none; }
-  .botao, .cta-fixo, .cartao, .galeria-item { transition: none; }
-  .cartao:hover, .galeria-item:hover { transform: none; }
+  .botao, .cta-fixo, .cartao, .galeria-item, .galeria-item img { transition: none; }
+  .cartao:hover, .galeria-item:hover, .galeria-item:hover img { transform: none; }
   /* marca: sem desenho de entrada; barra estática cheia (estado base).
      Brilho da marca e respiração do halo ficam de propósito: micro-vida
      de opacidade/brilho, sem transform — decisão deliberada. */
