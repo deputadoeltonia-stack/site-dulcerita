@@ -225,22 +225,27 @@ h2 {
 .topo-cta:hover { text-decoration: none !important; filter: brightness(1.05); }
 
 /* frase da identidade colada na borda direita (pg 6) — só telas largas */
+/* A frase era quem mandava na altura do header: 4 linhas numa caixa de
+   15rem davam 86px e esticavam o topo pra 89px, 20px acima do --topo-h que
+   o hero usa pra fechar na dobra. Caixa mais larga + entrelinha menor =
+   3 linhas curtas dentro da altura nominal. */
 .topo-frase {
   display: none;
   font-family: var(--fonte-display);
   font-weight: 900;
-  font-size: 0.66rem;
-  line-height: 1.5;
+  font-size: 0.6rem;
+  line-height: 1.35;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: var(--navy);
   background: var(--mint);
-  max-width: 15rem;
-  padding: 0.7rem 1rem;
+  max-width: 20rem;
+  padding: 0.5rem 1.1rem;
   /* sangra até a borda da tela, como no mockup */
-  margin: -0.85rem -1.25rem -0.85rem 0;
+  margin: -0.95rem -1.25rem -0.95rem 0;
   align-self: stretch;
   align-content: center;
+  text-wrap: balance;
 }
 
 /* ---------- hero (pg 6 do DULCE ID) ---------- */
@@ -1176,7 +1181,10 @@ h2 {
    ============================================================ */
 
 @media (min-width: 760px) {
-  :root { --topo-h: 4.3rem; }
+  /* medido: o CTA do nav é o item mais alto do header no desktop (71px).
+     A variável precisa bater com a altura real, senão o hero de 100svh
+     estoura a dobra pela diferença. */
+  :root { --topo-h: 4.45rem; }
 
   .topo { padding: 0.95rem 2rem; }
   .topo-nav { display: flex; }
