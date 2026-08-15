@@ -5,7 +5,7 @@
    Fontes oficiais: Geometos (títulos/destaques) + Avenir (corpo),
    servidas localmente de public/fonts.
    Assinatura visual: padrão de "pessoinhas" (pernas em Λ/V) com
-   parallax, logotipo vetor extraído do ID, número 44012 em Gunterz.
+   parallax, logotipo vetor extraído do ID, número 44400 em Gunterz.
    Mobile-first.
    ============================================================ */
 
@@ -337,7 +337,7 @@ h2 {
 
 .hero-acoes { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
-/* lockup oficial: // DEPUTADA ESTADUAL + DULCE RITΛ + 44012 + pessoinhas */
+/* lockup oficial: // DEPUTADA ESTADUAL + DULCE RITΛ + 44400 + pessoinhas */
 .hero-lockup {
   display: grid;
   justify-items: start;
