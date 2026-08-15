@@ -237,14 +237,12 @@ h2 {
   line-height: 1.35;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  /* sem a tarja mint: o texto assenta direto no branco do header. Segue
+     em navy (contraste alto) e perde a sangria — sem fundo, encostar na
+     borda da tela faria a frase parecer cortada. */
   color: var(--navy);
-  background: var(--mint);
   max-width: 20rem;
-  padding: 0.5rem 1.1rem;
-  /* sangra até a borda da tela, como no mockup */
-  margin: -0.95rem -1.25rem -0.95rem 0;
-  align-self: stretch;
-  align-content: center;
+  align-self: center;
   text-wrap: balance;
 }
 
