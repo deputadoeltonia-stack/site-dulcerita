@@ -185,7 +185,7 @@ h2 {
   box-shadow: 0 1px 0 rgba(9, 75, 104, 0.08);
 }
 
-.topo-marca { display: inline-flex; align-items: center; gap: 0.55rem; }
+.topo-marca { display: inline-flex; align-items: center; gap: 0.55rem; justify-self: start; }
 
 /* coração oficial ao lado do logotipo */
 .topo-coracao {
@@ -243,6 +243,8 @@ h2 {
   color: var(--navy);
   max-width: 20rem;
   align-self: center;
+  justify-self: end;
+  text-align: right;
   text-wrap: balance;
 }
 
@@ -1229,6 +1231,19 @@ h2 {
 /* frase da identidade no header (pg 6) — só quando sobra largura */
 @media (min-width: 1280px) {
   .topo-frase { display: block; }
+
+  /* Só aqui o header vira grid de 3 faixas: com as laterais em 1fr o nav
+     fica no centro ÓPTICO da tela, não no meio da sobra entre a marca e a
+     frase (larguras bem diferentes). Abaixo de 1280 falta largura — as
+     colunas laterais ficavam assimétricas e o nav quebrava em 2 linhas,
+     esticando o header; lá o space-between do flex resolve melhor. */
+  .topo {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .topo-marca { justify-self: start; }
+  .topo-frase { justify-self: end; }
 }
 
 /* ============================================================
