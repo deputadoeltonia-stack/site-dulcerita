@@ -925,18 +925,36 @@ h2 {
    4 campos), o respiro padrão de 4rem/4.5rem deixava vazio dos dois lados */
 #participar { padding: 2.6rem 0 3rem; }
 
-.participar-grade { display: grid; gap: 1rem; justify-content: center; }
+/* coluna única centralizada: convite e formulário empilhados no eixo do
+   miolo, como as outras seções. Antes eram duas colunas lado a lado. */
+.participar-grade {
+  display: grid;
+  gap: 1.4rem;
+  justify-items: center;
+  text-align: center;
+}
 
-/* no empilhado a prosa já traz a própria margem; a margem dupla abria um
-   buraco entre o convite e o primeiro campo */
-.participar-grade .prosa-clara { margin-bottom: 0.5rem; }
+.participar-convite { display: grid; justify-items: center; }
+
+.participar-grade .prosa-clara {
+  margin: 0 auto;
+  max-width: 46ch;
+}
 
 .formulario {
   width: min(100%, 28rem);
   display: grid;
   gap: 1.1rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem auto 0;
+  /* rótulo e consentimento voltam a alinhar à esquerda DENTRO do bloco: o
+     bloco é que fica centrado. Texto de formulário centralizado obriga o
+     olho a reencontrar o início de cada linha a cada campo. */
+  text-align: left;
 }
+
+.formulario .botao { justify-self: center; }
+
+.form-retorno { text-align: center; }
 
 .campo label {
   display: block;
@@ -976,8 +994,6 @@ h2 {
   margin-top: 0.15rem;
   accent-color: var(--lime);
 }
-
-.formulario .botao { justify-self: start; }
 
 .form-retorno { font-size: 0.92rem; font-weight: 600; min-height: 1.4em; }
 
@@ -1188,13 +1204,7 @@ h2 {
      morto no meio. Assim o par fica centralizado e colado. */
   #participar { padding: 3.6rem 0 4rem; }
 
-  .participar-grade {
-    grid-template-columns: minmax(0, 30rem) minmax(0, 28rem);
-    gap: 3.5rem;
-    align-items: center;
-  }
-
-  .formulario { margin-top: 0; }
+  .formulario { margin-top: 0.5rem; }
 
   .trajetoria { margin-top: 0; }
 
