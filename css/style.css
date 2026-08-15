@@ -1,30 +1,41 @@
 /* ============================================================
-   Dulce Rita — Cuidar de perto
-   Paleta "Vinho de perto": vinho profundo, papel rosado,
-   rosa de destaque, âmbar só no CTA.
-   Mobile-first. Assinatura: fio pontilhado costurando a página.
+   Dulce Rita — identidade oficial (docs/DULCE ID.pdf, pg 6)
+   Paleta medida do próprio PDF: navy #094b68, navy-claro #0a6089
+   (padrão), mint #5ac2ad, lime #add136, off-white #f0f4f2.
+   Fontes oficiais: Geometos (títulos/destaques) + Avenir (corpo),
+   servidas localmente de public/fonts.
+   Assinatura visual: padrão de "pessoinhas" (pernas em Λ/V) com
+   parallax, logotipo vetor extraído do ID, número 44012 em Gunterz.
+   Mobile-first.
    ============================================================ */
 
+@font-face { font-family: "Geometos"; src: url("../public/fonts/geometos.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Geometos Neue"; src: url("../public/fonts/geometos-bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Geometos Neue"; src: url("../public/fonts/geometos-black.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Avenir LT Std"; src: url("../public/fonts/avenir-300.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "Avenir LT Std"; src: url("../public/fonts/avenir-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Avenir LT Std"; src: url("../public/fonts/avenir-i.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Avenir LT Std"; src: url("../public/fonts/avenir-500.woff2") format("woff2"); font-weight: 500 800; font-display: swap; }
+
 :root {
-  --vinho: #6d1f3a;
-  --vinho-escuro: #521228;
-  --papel: #faf3ef;
-  --rosa: #c9557c;
-  --ambar: #e8a13d;
-  --tinta: #2b2126;
-  --tinta-suave: #6e5f66;
-  --claro: #fdf9f7;
+  --navy: #094b68;
+  --navy-claro: #0a6089;   /* padrão sobre navy, hovers */
+  --navy-fundo: #083a52;   /* rodapé, degradês */
+  --mint: #5ac2ad;
+  --lime: #add136;
+  --off: #f0f4f2;
+  --branco: #ffffff;
+  --tinta: #10333f;        /* corpo de texto sobre claro */
+  --tinta-suave: #48626e;
 
-  --fonte-display: "Gloock", "Georgia", serif;
-  --fonte-corpo: "Archivo", "Helvetica Neue", sans-serif;
+  --fonte-display: "Geometos Neue", "Geometos", "Avenir LT Std", sans-serif;
+  --fonte-corpo: "Avenir LT Std", "Avenir Next", "Avenir", "Segoe UI", sans-serif;
 
-  --miolo: 68rem;
-  --fio-x: 1.1rem;         /* distância do fio até a borda do miolo */
+  --miolo: 72rem;
   --raio: 14px;
-  /* altura do header. O .topo é sticky e fica no fluxo, então empurra o
-     hero pra baixo: sem descontar isso o hero de 100svh sobra fora da
-     dobra e corta a foto. .topo tem min-height igual, pra não mentir. */
-  --topo-h: 4rem;
+  /* header sticky fica no fluxo e empurra o hero; o hero de 100svh
+     desconta isto pra fechar exatamente na dobra */
+  --topo-h: 4.1rem;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +45,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--fonte-corpo);
   color: var(--tinta);
-  background: var(--papel);
+  background: var(--off);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -44,7 +55,7 @@ img { max-width: 100%; display: block; }
 a { color: inherit; }
 
 :focus-visible {
-  outline: 3px solid var(--ambar);
+  outline: 3px solid var(--lime);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -55,34 +66,75 @@ a { color: inherit; }
   padding: 0 1.25rem;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ---------- tipografia ---------- */
 
-h1, h2 {
-  font-family: var(--fonte-display);
+/* Regra da identidade (confirmada pelo user): título em Geometos REGULAR;
+   a BOLD (Neue Black) só na palavra destacada — peso + cor juntos fazem
+   o destaque. Subtítulos e conteúdo em Avenir. */
+h2 {
+  font-family: "Geometos", var(--fonte-display);
   font-weight: 400;
-  line-height: 1.06;
-  letter-spacing: -0.01em;
-}
-
-h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
-
-.olho {
-  font-size: 0.78rem;
-  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--rosa);
-  margin-bottom: 0.9rem;
+  font-size: clamp(1.45rem, 4.2vw, 2.3rem);
+  line-height: 1.22;
+  letter-spacing: 0.02em;
+  color: var(--navy);
+  text-wrap: balance;
 }
 
-.olho-claro { color: var(--ambar); }
+/* palavra destacada dentro do título (BOLD Geometos + cor da marca) */
+.destaque, .destaque-lime {
+  font-family: "Geometos Neue", "Geometos", var(--fonte-display);
+  font-weight: 900;
+}
+.destaque { color: var(--mint); }
+.destaque-lime { color: var(--lime); }
 
 .prosa p, .prosa-clara {
-  max-width: 38rem;
+  max-width: 65ch;
   margin-bottom: 1rem;
 }
 
-.prosa-clara { color: rgba(253, 249, 247, 0.88); margin-bottom: 2rem; }
+.prosa-clara { color: rgba(240, 244, 242, 0.92); margin-bottom: 2rem; }
+
+/* ---------- cabeçalho de seção (centralizado) ---------- */
+
+.secao-cabeca {
+  text-align: center;
+  max-width: 46rem;
+  margin: 0 auto 2.6rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+}
+
+.secao-cabeca-esq {
+  text-align: left;
+  justify-items: start;
+  margin: 0 0 1.4rem;
+}
+
+.secao-icone {
+  width: 1.9rem;
+  height: auto;
+  color: var(--mint);
+}
+
+.secao-navy .secao-icone { color: var(--lime); }
+
+.secao-linha {
+  font-size: clamp(1.02rem, 2.6vw, 1.2rem);
+  color: var(--tinta-suave);
+}
 
 /* ---------- botões ---------- */
 
@@ -99,15 +151,23 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.botao-ambar {
-  background: var(--ambar);
-  color: var(--tinta);
-  box-shadow: 0 4px 16px rgba(232, 161, 61, 0.35);
+.botao-lime {
+  background: var(--lime);
+  color: var(--navy);
+  box-shadow: 0 4px 16px rgba(173, 209, 54, 0.35);
 }
 
-.botao-ambar:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(232, 161, 61, 0.45); }
+.botao-lime:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(173, 209, 54, 0.5); }
 
-/* ---------- topo ---------- */
+.botao-linha {
+  border: 1px solid rgba(240, 244, 242, 0.45);
+  color: var(--off);
+  background: rgba(240, 244, 242, 0.07);
+}
+
+.botao-linha:hover { background: rgba(240, 244, 242, 0.16); transform: translateY(-2px); }
+
+/* ---------- topo (pg 6: header branco, logo navy, nav) ---------- */
 
 .topo {
   position: sticky;
@@ -117,268 +177,271 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.8rem 1.25rem;
-  background: color-mix(in srgb, var(--vinho) 96%, transparent);
+  gap: 1.2rem;
+  padding: 0.85rem 1.25rem;
+  background: color-mix(in srgb, var(--branco) 96%, transparent);
   backdrop-filter: blur(6px);
-  color: var(--claro);
+  color: var(--navy);
+  box-shadow: 0 1px 0 rgba(9, 75, 104, 0.08);
 }
 
-.topo-marca {
-  font-family: var(--fonte-display);
-  font-size: 1.25rem;
-  text-decoration: none;
+.topo-marca { display: inline-flex; align-items: center; gap: 0.55rem; }
+
+/* coração oficial ao lado do logotipo */
+.topo-coracao {
+  width: 1.35rem;
+  height: auto;
+  color: var(--mint);
+  flex: none;
+  /* alinha com o olho ótico do logotipo (as letras têm respiro no viewBox) */
+  margin-top: 0.1rem;
 }
 
-.topo-nav { display: flex; align-items: center; gap: 1.4rem; }
+.logotipo {
+  width: clamp(9.5rem, 30vw, 11.5rem);
+  height: auto;
+  display: block;
+  color: var(--navy);
+}
+
+.topo-nav { display: none; align-items: center; gap: 1.5rem; }
 
 .topo-nav a {
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  opacity: 0.92;
 }
 
-.topo-nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+.topo-nav a:hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-color: var(--mint); }
 
 .topo-cta {
-  background: var(--ambar);
-  color: var(--tinta) !important;
+  background: var(--lime);
+  color: var(--navy) !important;
   font-weight: 700;
-  padding: 0.45rem 1.1rem;
+  padding: 0.5rem 1.15rem;
   border-radius: 999px;
 }
 
-/* nav completa só no desktop */
-.topo-nav a:not(.topo-cta) { display: none; }
+.topo-cta:hover { text-decoration: none !important; filter: brightness(1.05); }
 
-/* ---------- hero (cinematográfico) ---------- */
+/* frase da identidade colada na borda direita (pg 6) — só telas largas */
+.topo-frase {
+  display: none;
+  font-family: var(--fonte-display);
+  font-weight: 900;
+  font-size: 0.66rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  background: var(--mint);
+  max-width: 15rem;
+  padding: 0.7rem 1rem;
+  /* sangra até a borda da tela, como no mockup */
+  margin: -0.85rem -1.25rem -0.85rem 0;
+  align-self: stretch;
+  align-content: center;
+}
+
+/* ---------- hero (pg 6 do DULCE ID) ---------- */
 
 .hero {
   position: relative;
   min-height: calc(100svh - var(--topo-h));
-  /* Mobile: coluna. O texto ocupa o que precisa e a foto fica com o resto
-     exato da dobra. Reservar espaço com padding fixo não funcionava: bastava
-     o título ganhar uma linha pra foto cair fora da tela. */
   display: flex;
   flex-direction: column;
-  /* clip, não hidden: hidden viraria scroll container e quebraria
-     sticky/animation-timeline dos descendentes (gotcha conhecido) */
   overflow: clip;
-  color: var(--claro);
+  color: var(--off);
   background:
-    radial-gradient(70% 55% at 72% 42%, rgba(201, 85, 124, 0.42), transparent 68%),
-    linear-gradient(185deg, #7a2342 0%, var(--vinho) 38%, var(--vinho-escuro) 100%);
-  padding: 2.5rem 0 0;
+    radial-gradient(90% 70% at 78% 30%, rgba(10, 96, 137, 0.55), transparent 70%),
+    linear-gradient(180deg, var(--navy) 0%, #08425c 100%);
+  padding: 2.2rem 0 0;
 }
 
-/* No mobile as quebras manuais do título gastam uma linha a mais e empurram
-   a foto pra fora da dobra. Deixa o texto quebrar sozinho; a partir de 760px
-   a largura comporta as quebras desenhadas. */
-.hero-titulo br { display: none; }
-
-/* camadas do hero: brilho (1) → retrato (2) → vinheta (3) → conteúdo (4) */
-.hero-brilho {
+/* padrão oficial: tile SVG repetido; o JS move com o scroll (parallax).
+   Nasce mais alto que o hero pra ter curso de sobra ao deslocar. */
+.padrao {
   position: absolute;
-  z-index: 1;
-  right: -18%;
-  bottom: 0;
-  width: 115vw;
-  height: 78vh;
-  background: radial-gradient(closest-side, rgba(232, 161, 61, 0.28), rgba(201, 85, 124, 0.18) 45%, transparent 72%);
+  left: 0;
+  right: 0;
+  bottom: -20%;
+  height: 75%;
+  background: url("../public/assets/marca/padrao-navy.svg");
+  background-size: 194px auto;
   pointer-events: none;
-  /* respiração ambiente: só opacidade, base = frame `from` (sem salto) */
-  opacity: 0.68;
-  animation: halo-respira 6.5s ease-in-out infinite alternate;
+  will-change: transform;
+  /* dissolve no topo pra não terminar em linha reta */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 38%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 38%);
 }
 
-@keyframes halo-respira {
-  from { opacity: 0.68; }
-  to   { opacity: 1; }
-}
+.padrao-hero { z-index: 1; opacity: 0.6; }
 
-/* vinheta: escurece bordas, puxa o olho pro centro */
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background:
-    radial-gradient(120% 85% at 50% 45%, transparent 42%, rgba(30, 8, 18, 0.55) 100%),
-    linear-gradient(to top, rgba(30, 8, 18, 0.75) 0%, transparent 42%);
-}
+/* camadas: padrão (1) → retrato (2) → conteúdo (3) */
 
-/* mobile: item do flex, fica com a sobra da dobra (min-height é o piso
-   pra ela não sumir em tela muito baixa) */
+/* Foto oficial em MEIO CORPO (pedido da campanha + pg 6): a caixa tem
+   proporção fixa e a foto preenche com cover ancorado no topo — o corte
+   fica na cintura, igual no mockup. */
 .hero-retrato {
   order: 2;
-  /* base 0, não auto: com auto a base vira a altura natural da imagem
-     (644px) e o hero estica além da dobra. Com 0 ela fica só com a sobra. */
-  flex: 1 1 0;
-  min-height: 8rem;
   position: relative;
   z-index: 2;
-  margin-right: -8vw;
+  flex: 1 1 0;
+  min-height: min(34svh, 17rem);
   pointer-events: none;
+  display: flex;
+  justify-content: center;
 }
 
-/* No empilhado a foto é dimensionada pela LARGURA, não pela altura: como a
-   proporção é 0.41, caber inteira na sobra vertical a reduzia a ~110px de
-   largura. Assim ela tem presença e o rodapé do vestido é cortado pela
-   dobra (o .hero tem overflow: clip), que é como retrato de hero funciona. */
 .hero-retrato img {
-  width: min(62vw, 20rem);   /* teto: sem ele domina a tela no tablet */
+  width: min(88vw, 24rem);
   max-width: none;
-  height: auto;
-  margin-left: auto;   /* encosta na direita */
-  object-fit: contain;
-  object-position: bottom right;
-  filter: drop-shadow(-18px 10px 40px rgba(30, 8, 18, 0.5)) contrast(1.04) saturate(1.02);
-  /* pés se dissolvem no fundo em vez de cortar reto */
-  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 14%);
-  mask-image: linear-gradient(to top, transparent 0%, #000 14%);
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;   /* folga do topo ja vem na propria imagem */
+  /* sem drop-shadow: a sombra de 40px em volta da silhueta escurecia o
+     padrão atrás e lia como um "quadrado meio transparente" na foto */
+  filter: contrast(1.04) saturate(1.02);
+  /* base dissolve no padrão em vez de cortar reto */
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 9%);
+  mask-image: linear-gradient(to top, transparent 0%, #000 9%);
 }
 
 .sem-foto { display: none; }
 
-.hero-conteudo { order: 1; flex: 0 0 auto; position: relative; z-index: 4; width: 100%; }
-
-.hero-titulo {
-  /* limitado pela largura E pela altura: nunca empurra o CTA pra fora da dobra */
-  font-size: clamp(2.1rem, min(7.5vw, 7.2svh), 4.6rem);
-  line-height: 1.04;
-  margin: 0.6rem 0 1.2rem;
-  text-wrap: balance;
-}
-
-/* marcador: destaque pintado atrás da palavra-chave */
-.marca {
-  font-style: normal;
+.hero-conteudo {
+  order: 1;
   position: relative;
-  white-space: nowrap;
+  z-index: 3;
+  width: 100%;
+  display: grid;
+  gap: 2rem;
 }
 
-.marca::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: -0.12em;
-  right: -0.12em;
-  bottom: 0.06em;
-  height: 0.42em;
-  background: var(--ambar);
-  opacity: 0.85;
-  transform: skewX(-3deg);
-  transform-origin: 0 50%;
-  /* fill both: durante o delay vale o frame `from` (scaleX 0), sem pulo */
-  animation: marca-desenha 0.85s cubic-bezier(0.25, 1, 0.5, 1) 0.9s both;
+/* citação da identidade (esquerda no desktop) */
+.hero-citacao p {
+  font-size: clamp(1.15rem, 3.6vw, 1.55rem);
+  line-height: 1.4;
+  max-width: 21ch;
+  margin-bottom: 1.4rem;
+  color: rgba(240, 244, 242, 0.94);
+  text-wrap: pretty;
 }
 
-@keyframes marca-desenha {
-  from { transform: skewX(-3deg) scaleX(0); }
-  to   { transform: skewX(-3deg) scaleX(1); }
-}
-
-/* brilho diagonal varrendo a marca — ::after pinta DEPOIS do ::before
-   (fica acima do âmbar) e z-index -1 mantém abaixo do texto */
-.marca::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: -0.12em;
-  right: -0.12em;
-  bottom: 0.06em;
-  height: 0.42em;
-  transform: skewX(-3deg);
-  pointer-events: none;
-  background: linear-gradient(105deg, transparent 32%, rgba(255, 250, 244, 0.6) 50%, transparent 68%) no-repeat;
-  background-size: 55% 100%;
-  /* base = frame 0% da animação: fora do quadro, sem lasca antes do delay */
-  background-position: -150% 0;
-  animation: marca-brilho 5s linear 2.2s infinite;
-}
-
-/* com size 55%, o brilho só sai do quadro fora de [-122%, 222%] —
-   endpoints -150%/260% garantem sumiço total e retorno sem teleporte */
-@keyframes marca-brilho {
-  0%   { background-position: -150% 0; }
-  26%  { background-position: 260% 0; }
-  100% { background-position: 260% 0; }
-}
-
-.hero-frase {
-  max-width: 33rem;
-  font-size: 1.05rem;
-  color: rgba(253, 249, 247, 0.82);
-  margin-bottom: 2rem;
-  text-shadow: 0 1px 12px rgba(30, 8, 18, 0.5);
-}
+.hero-citacao strong { color: var(--mint); font-weight: 700; }
 
 .hero-acoes { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
-.botao-linha {
-  border: 1px solid rgba(253, 249, 247, 0.4);
-  color: var(--claro);
-  background: rgba(253, 249, 247, 0.06);
-  backdrop-filter: blur(4px);
+/* lockup oficial: // DEPUTADA ESTADUAL + DULCE RITΛ + 44012 + pessoinhas */
+.hero-lockup {
+  display: grid;
+  justify-items: start;
+  gap: 0.9rem;
 }
 
-.botao-linha:hover { background: rgba(253, 249, 247, 0.14); transform: translateY(-2px); }
-
-.com-fio {
-  position: relative;
-  padding-left: 1.9rem;
-  margin-left: var(--fio-x);
-  padding-top: 0.2rem;
+.lockup-cargo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: "Geometos", var(--fonte-display);
+  font-weight: 400;
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  color: var(--branco);
 }
 
-/* fio: linha fina que nasce forte no nó e se dissolve — costura as seções */
-.com-fio::before {
-  content: "";
+.lockup-barras { width: 0.85em; height: auto; color: var(--lime); flex: none; }
+
+.lockup-nome {
+  width: min(78vw, 26rem);
+  height: auto;
+  color: var(--off);
+}
+
+.lockup-voto {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.9rem;
+}
+
+.lockup-numero {
+  width: min(56vw, 19rem);
+  height: auto;
+  color: var(--branco);
+  filter: drop-shadow(0 0 30px rgba(173, 209, 54, 0.25));
+}
+
+.lockup-coracao {
+  width: clamp(2.1rem, 6vw, 2.9rem);
+  height: auto;
+  color: var(--mint);
+  /* respira junto com o número, sem transform (não briga com reduced-motion) */
+  animation: coracao-pulsa 2.4s ease-in-out infinite;
+}
+
+@keyframes coracao-pulsa {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* seta de rolagem (pg 6): círculo mint com seta navy */
+.hero-seta {
   position: absolute;
-  left: 0;
-  top: 0.3rem;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--rosa), color-mix(in srgb, var(--rosa) 20%, transparent) 88%, transparent);
-}
-
-.secao-vinho .com-fio::before {
-  background: linear-gradient(to bottom, var(--ambar), rgba(232, 161, 61, 0.12) 88%, transparent);
-}
-
-.no {
-  position: absolute;
-  left: -0.28rem;
-  top: 0;
-  width: 0.62rem;
-  height: 0.62rem;
+  z-index: 3;
+  right: clamp(1rem, 6vw, 4rem);
+  bottom: clamp(1rem, 5svh, 2.6rem);
+  width: 3.4rem;
+  height: 3.4rem;
   border-radius: 50%;
-  background: var(--rosa);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--rosa) 18%, transparent), 0 0 16px 2px color-mix(in srgb, var(--rosa) 60%, transparent);
+  background: var(--mint);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 24px rgba(4, 24, 35, 0.4);
+  animation: seta-flutua 2.6s ease-in-out infinite;
 }
 
-.secao-vinho .no { background: var(--ambar); box-shadow: 0 0 0 4px rgba(232, 161, 61, 0.2), 0 0 20px 3px rgba(232, 161, 61, 0.55); }
+.hero-seta svg { width: 1.3rem; height: 1.3rem; }
+
+.hero-seta:hover { background: var(--lime); }
+
+@keyframes seta-flutua {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
 
 /* ---------- seções ---------- */
 
-.secao { padding: 4rem 0 4.5rem; }
-
-.secao-vinho {
-  color: var(--claro);
-  background:
-    radial-gradient(80% 60% at 20% 0%, rgba(201, 85, 124, 0.28), transparent 70%),
-    linear-gradient(180deg, var(--vinho) 0%, var(--vinho-escuro) 100%);
+.secao {
+  position: relative;
+  padding: 4rem 0 4.5rem;
+  overflow: clip;
 }
+
+.secao-navy {
+  color: var(--off);
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-fundo) 100%);
+}
+
+.secao-navy h2 { color: var(--branco); }
+
+/* padrão discreto nas seções navy, também com parallax */
+.padrao-secao {
+  bottom: -25%;
+  height: 70%;
+  opacity: 0.35;
+}
+
+.secao-navy .miolo { position: relative; z-index: 1; }
 
 .bio-grade { display: grid; gap: 2.5rem; }
 
 .prosa-abre {
-  font-family: var(--fonte-display);
-  font-size: clamp(1.2rem, 3.2vw, 1.5rem);
-  line-height: 1.35;
-  color: var(--vinho);
+  font-size: clamp(1.12rem, 3vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--navy);
 }
 
 /* ---------- trajetória ---------- */
@@ -400,16 +463,16 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 .traj-ano {
   font-weight: 700;
   font-size: 0.85rem;
-  color: var(--vinho);
-  background: color-mix(in srgb, var(--rosa) 14%, var(--claro));
-  border: 1px solid color-mix(in srgb, var(--rosa) 35%, transparent);
+  color: var(--navy);
+  background: color-mix(in srgb, var(--mint) 18%, var(--branco));
+  border: 1px solid color-mix(in srgb, var(--mint) 45%, transparent);
   border-radius: 999px;
   text-align: center;
   padding: 0.25rem 0.4rem;
   margin-top: 0.15rem;
 }
 
-.trajetoria h3 { font-size: 1.05rem; margin-bottom: 0.15rem; }
+.trajetoria h3 { font-size: 1.05rem; margin-bottom: 0.15rem; color: var(--navy); }
 
 .trajetoria p { color: var(--tinta-suave); font-size: 0.95rem; }
 
@@ -417,25 +480,22 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 
 .eixos { display: grid; gap: 2.4rem; }
 
-.eixo { margin-top: 0; }
-
+/* subtítulo em Avenir (regra do user: Geometos só pra destaque) */
 .eixo-titulo {
-  font-size: 0.85rem;
+  font-family: var(--fonte-corpo);
   font-weight: 700;
+  font-size: 0.95rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--ambar);
+  letter-spacing: 0.12em;
+  color: var(--lime);
   margin-bottom: 1rem;
 }
 
-.cartoes {
-  display: grid;
-  gap: 1rem;
-}
+.cartoes { display: grid; gap: 1rem; }
 
 .cartao {
-  background: linear-gradient(160deg, rgba(253, 249, 247, 0.11), rgba(253, 249, 247, 0.04));
-  border: 1px solid rgba(253, 249, 247, 0.14);
+  background: rgba(240, 244, 242, 0.07);
+  border: 1px solid rgba(240, 244, 242, 0.16);
   border-radius: var(--raio);
   padding: 1.5rem 1.6rem;
   transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
@@ -443,34 +503,33 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 
 .cartao:hover {
   transform: translateY(-4px);
-  border-color: rgba(232, 161, 61, 0.55);
-  background: linear-gradient(160deg, rgba(253, 249, 247, 0.16), rgba(253, 249, 247, 0.05));
+  border-color: rgba(90, 194, 173, 0.65);
+  background: rgba(240, 244, 242, 0.11);
 }
 
 .cartao h4 {
-  font-family: var(--fonte-display);
-  font-weight: 400;
-  font-size: 1.22rem;
-  line-height: 1.25;
+  font-size: 1.18rem;
+  font-weight: 700;
+  line-height: 1.3;
   margin-bottom: 0.5rem;
-  color: var(--claro);
+  color: var(--branco);
 }
 
-.cartao p { font-size: 0.95rem; color: rgba(253, 249, 247, 0.82); }
+.cartao p { font-size: 0.95rem; color: rgba(240, 244, 242, 0.85); }
 
-/* prioridades: marcador âmbar desenhado, sem bullet do browser */
+/* prioridades com a pessoinha oficial como marcador (pedido: trocar o "-") */
 .prioridades {
   list-style: none;
   margin-top: 1.1rem;
   display: grid;
-  gap: 0.6rem;
+  gap: 0.65rem;
 }
 
 .prioridades li {
   position: relative;
-  padding-left: 1.4rem;
+  padding-left: 1.55rem;
   font-size: 0.93rem;
-  color: rgba(253, 249, 247, 0.9);
+  color: rgba(240, 244, 242, 0.92);
   line-height: 1.45;
 }
 
@@ -478,58 +537,222 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   content: "";
   position: absolute;
   left: 0;
-  top: 0.55em;
-  width: 0.5rem;
-  height: 2px;
-  background: var(--ambar);
+  top: 0.22em;
+  width: 0.95em;
+  height: 1.1em;
+  background: var(--mint);
+  -webkit-mask: url("../public/assets/marca/pessoinha.svg") no-repeat center / contain;
+  mask: url("../public/assets/marca/pessoinha.svg") no-repeat center / contain;
 }
 
 /* citação dela dentro da bio */
 .citacao {
   margin-top: 1.8rem;
-  padding-left: 1.2rem;
-  border-left: 2px solid var(--rosa);
+  padding: 1.3rem 1.4rem;
+  background: color-mix(in srgb, var(--mint) 12%, var(--branco));
+  border-radius: var(--raio);
 }
 
 .citacao p {
-  font-family: var(--fonte-display);
-  font-size: 1.05rem;
-  line-height: 1.45;
-  color: var(--vinho);
+  font-size: 1.02rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--navy);
   margin-bottom: 0.6rem;
 }
 
 .citacao footer {
-  font-size: 0.82rem;
+  font-family: var(--fonte-corpo);
   font-weight: 700;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--tinta-suave);
 }
 
-/* ---------- depoimentos ---------- */
+/* ---------- depoimentos: cartazes subindo e empilhando ----------
+   Mesmo padrão do site do Tozi: cada card é sticky e os anteriores
+   encolhem conforme o próximo cobre (scroll-driven). 3 camadas:
+   1. sem view-timeline  -> só o empilhado sticky (todo browser)
+   2. com view-timeline  -> + scale dirigido pelo scroll
+   3. reduced-motion     -> sem scale (sticky fica: é layout, não animação) */
 
 .depoimentos {
-  display: grid;
-  gap: 1rem;
-  margin-bottom: 3rem;
+  --numcards: 7;
+  --stack-top: calc(var(--topo-h) + 1.1rem);
+  --stack-step: 12px;   /* degrau visível entre cards empilhados */
+  max-width: 50rem;
+  margin: 0 auto 3rem;
+  view-timeline-name: --depos-rolando;
 }
 
 .depo {
-  background: var(--claro);
-  border: 1px solid color-mix(in srgb, var(--rosa) 25%, transparent);
+  --index0: calc(var(--index) - 1);
+  --reverse-index: calc(var(--numcards) - var(--index0));
+  position: sticky;
+  top: calc(var(--stack-top) + var(--index0) * var(--stack-step));
+  margin-bottom: 1.2rem;
+  background: var(--branco);
+  border: 1px solid color-mix(in srgb, var(--mint) 30%, transparent);
   border-radius: var(--raio);
   padding: 1.5rem 1.6rem;
+  box-shadow: 0 12px 32px rgba(9, 75, 104, 0.12);
+  transform-origin: 50% 0;
+}
+
+.depo:nth-child(1) { --index: 1; }
+.depo:nth-child(2) { --index: 2; }
+.depo:nth-child(3) { --index: 3; }
+.depo:nth-child(4) { --index: 4; }
+.depo:nth-child(5) { --index: 5; }
+.depo:nth-child(6) { --index: 6; }
+.depo:nth-child(7) { --index: 7; }
+.depo:last-child { margin-bottom: 0; }
+
+/* scale só onde há timeline E o usuário aceita motion; fora do @supports o
+   browser rodaria a animação com 0s e congelaria os cards encolhidos */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .depo {
+      --faixa-ini: calc(var(--index0) / var(--numcards) * 100%);
+      --faixa-fim: calc(var(--index) / var(--numcards) * 100%);
+      animation: linear depo-encolhe forwards;
+      animation-timeline: --depos-rolando;
+      animation-range: exit-crossing var(--faixa-ini) exit-crossing var(--faixa-fim);
+    }
+    /* fator 0.03: com 7 cards, 0.05 encolheria o 1º a 0.70 */
+    @keyframes depo-encolhe {
+      to { transform: scale(calc(1.03 - (0.03 * var(--reverse-index)))); }
+    }
+  }
 }
 
 .depo p {
-  font-family: var(--fonte-display);
-  font-size: 1.12rem;
-  line-height: 1.4;
+  font-size: 1.02rem;
+  line-height: 1.55;
   margin-bottom: 0.9rem;
+  color: var(--tinta);
 }
 
 .depo footer { font-size: 0.88rem; color: var(--tinta-suave); }
+
+.depo footer strong { color: var(--navy); }
+
+/* ---------- depoimentos em vídeo ---------- */
+
+.video-depoimentos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin: 2rem 0;
+}
+
+.video-item {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: none;
+  padding: 0.8rem;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  background: var(--navy-fundo);   /* aparece durante o carregamento do poster */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s ease;
+}
+
+.video-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* scrim fundo o bastante pra legenda de 2 linhas sobre poster claro */
+  background: linear-gradient(to top, rgba(4, 24, 35, 0.9) 0%, rgba(4, 24, 35, 0.62) 26%, rgba(4, 24, 35, 0.2) 52%, transparent 72%);
+}
+
+.video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 999px;
+  background: rgba(4, 24, 35, 0.55);
+  border: 1.5px solid rgba(240, 244, 242, 0.85);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.video-play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 56%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 0.55rem 0 0.55rem 0.9rem;
+  border-color: transparent transparent transparent var(--off);
+}
+
+.video-item:hover .video-play,
+.video-item:focus-visible .video-play { transform: translate(-50%, -50%) scale(1.1); background: var(--mint); }
+.video-item:hover img { transform: scale(1.04); }
+
+.video-item:hover { transform: scale(1.02); box-shadow: 0 12px 30px rgba(9, 75, 104, 0.28); }
+.video-item:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+
+.video-legenda {
+  position: relative;
+  z-index: 1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--branco);
+  text-shadow: 0 1px 6px rgba(4, 24, 35, 0.6);
+  text-align: left;
+}
+
+.video-lightbox {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+.video-lightbox::backdrop { background: rgba(4, 24, 35, 0.92); }
+
+.video-lightbox[open] { display: flex; align-items: center; justify-content: center; }
+
+.video-lightbox figure { max-width: min(90vw, 32rem); max-height: 88vh; }
+
+.video-lightbox-player {
+  display: block;
+  max-width: min(90vw, 32rem);
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--raio);
+  background: #000;
+}
+
+@media (min-width: 640px) {
+  .video-depoimentos { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- galeria ---------- */
 
 .galeria {
   display: grid;
@@ -545,6 +768,7 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   display: flex;
   align-items: flex-end;
   padding: 0.8rem;
+  cursor: zoom-in;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -555,6 +779,7 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   height: 100%;
   object-fit: cover;
   object-position: top center;   /* prioriza rostos ao cortar retratos */
+  transition: transform 0.4s ease;
 }
 
 /* véu na base: legenda clara legível sobre qualquer foto */
@@ -562,7 +787,7 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(30, 8, 18, 0.82) 0%, rgba(30, 8, 18, 0.28) 28%, transparent 52%);
+  background: linear-gradient(to top, rgba(4, 24, 35, 0.82) 0%, rgba(4, 24, 35, 0.28) 28%, transparent 52%);
   transition: opacity 0.3s ease;
 }
 
@@ -571,17 +796,100 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   z-index: 1;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--claro);
-  text-shadow: 0 1px 6px rgba(30, 8, 18, 0.6);
+  color: var(--branco);
+  text-shadow: 0 1px 6px rgba(4, 24, 35, 0.6);
 }
 
 .galeria-item:hover {
   transform: scale(1.02);
-  box-shadow: 0 12px 30px rgba(109, 31, 58, 0.28);
+  box-shadow: 0 12px 30px rgba(9, 75, 104, 0.28);
 }
 
 .galeria-item:hover img { transform: scale(1.04); }
-.galeria-item img { transition: transform 0.4s ease; }
+
+.galeria-item:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+
+/* ---------- lightbox da galeria ---------- */
+
+.lightbox {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+.lightbox::backdrop { background: rgba(4, 24, 35, 0.92); }
+
+.lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox figure { max-width: min(90vw, 60rem); max-height: 82vh; }
+
+.lightbox-img {
+  display: block;
+  max-width: min(90vw, 60rem);
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--raio);
+  object-fit: contain;
+}
+
+.lightbox-legenda {
+  margin-top: 0.7rem;
+  text-align: center;
+  color: var(--off);
+  font-size: 0.92rem;
+}
+
+.lightbox-fechar,
+.lightbox-nav {
+  position: fixed;
+  background: rgba(240, 244, 242, 0.14);
+  color: var(--off);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s ease;
+}
+
+.lightbox-fechar:hover,
+.lightbox-nav:hover { background: rgba(240, 244, 242, 0.26); }
+
+.lightbox-fechar {
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  font-size: 1.1rem;
+}
+
+.lightbox-nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.lightbox-anterior { left: 1rem; }
+.lightbox-proxima { right: 1rem; }
+
+@media (max-width: 640px) {
+  .lightbox-nav { width: 2.6rem; height: 2.6rem; font-size: 1.5rem; }
+  .lightbox-anterior { left: 0.4rem; }
+  .lightbox-proxima { right: 0.4rem; }
+}
 
 /* ---------- formulário ---------- */
 
@@ -606,14 +914,14 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   font: inherit;
   padding: 0.85rem 1rem;
   border-radius: 10px;
-  border: 1px solid rgba(253, 249, 247, 0.35);
-  background: rgba(253, 249, 247, 0.1);
-  color: var(--claro);
+  border: 1px solid rgba(240, 244, 242, 0.4);
+  background: rgba(240, 244, 242, 0.1);
+  color: var(--branco);
 }
 
-.campo input::placeholder { color: rgba(253, 249, 247, 0.45); }
+.campo input::placeholder { color: rgba(240, 244, 242, 0.55); }
 
-.campo input:focus { outline: 3px solid var(--ambar); outline-offset: 1px; border-color: transparent; }
+.campo input:focus { outline: 3px solid var(--lime); outline-offset: 1px; border-color: transparent; }
 
 .campo-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
@@ -623,38 +931,69 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   gap: 0.6rem;
   align-items: start;
   font-size: 0.82rem;
-  color: rgba(253, 249, 247, 0.85);
+  color: rgba(240, 244, 242, 0.88);
 }
 
 .campo-consentimento input {
   width: 1.15rem;
   height: 1.15rem;
   margin-top: 0.15rem;
-  accent-color: var(--ambar);
+  accent-color: var(--lime);
 }
 
 .formulario .botao { justify-self: start; }
 
 .form-retorno { font-size: 0.92rem; font-weight: 600; min-height: 1.4em; }
 
-.form-retorno.ok { color: var(--ambar); }
+.form-retorno.ok { color: var(--lime); }
 .form-retorno.erro { color: #ffb4c4; }
 
-/* ---------- rodapé ---------- */
+/* ---------- rodapé (3 colunas no desktop) ---------- */
 
 .rodape {
-  background: var(--vinho-escuro);
-  color: var(--claro);
-  padding: 2.5rem 0 6rem;   /* respiro pro CTA fixo no mobile */
+  background: var(--navy-fundo);
+  color: var(--off);
+  padding: 3rem 0 6rem;   /* respiro pro CTA fixo no mobile */
 }
 
-.rodape-grade { display: grid; gap: 1.5rem; }
+.rodape-grade { display: grid; gap: 2.2rem; }
 
-.rodape-nome { font-family: var(--fonte-display); font-size: 1.4rem; }
+.logotipo-rodape { width: 10rem; color: var(--branco); margin-bottom: 0.9rem; }
 
-.rodape-slogan { color: var(--ambar); font-size: 0.95rem; }
+.rodape-voto {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
 
-.rodape-social { display: flex; gap: 1rem; }
+.rodape-numero { width: 7.6rem; height: auto; color: var(--branco); }
+
+.rodape-voto img { width: 2.4rem; height: auto; }
+
+.rodape-slogan { color: var(--mint); font-size: 0.95rem; }
+
+.rodape-titulo {
+  font-family: var(--fonte-corpo);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mint);
+  margin-bottom: 0.9rem;
+}
+
+.rodape-nav { display: grid; gap: 0.45rem; justify-items: start; }
+
+.rodape-nav > a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: rgba(240, 244, 242, 0.85);
+}
+
+.rodape-nav > a:hover { color: var(--branco); text-decoration: underline; text-underline-offset: 4px; }
+
+.rodape-social { display: flex; gap: 0.9rem; margin-top: 0.9rem; }
 
 .rodape-social a {
   display: grid;
@@ -662,13 +1001,13 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 50%;
-  border: 1px solid rgba(253, 249, 247, 0.3);
-  color: var(--claro);
+  border: 1px solid rgba(240, 244, 242, 0.3);
+  color: var(--off);
 }
 
-.rodape-social a:hover { background: rgba(253, 249, 247, 0.12); }
+.rodape-social a:hover { background: rgba(240, 244, 242, 0.12); }
 
-.rodape-legal { font-size: 0.78rem; color: rgba(253, 249, 247, 0.6); }
+.rodape-legal { font-size: 0.8rem; line-height: 1.7; color: rgba(240, 244, 242, 0.68); }
 
 /* ---------- CTA fixo (mobile) ---------- */
 
@@ -693,7 +1032,7 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
 
 @supports (animation-timeline: view()) {
 
-  /* régua de leitura: linha âmbar sob o header preenchendo com o scroll.
+  /* régua de leitura: linha mint sob o header preenchendo com o scroll.
      Scroll-linked 1:1 com o gesto do usuário — deliberadamente sem gate
      de reduced-motion (não é movimento autônomo). */
   .topo::after {
@@ -703,10 +1042,9 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
     right: 0;
     bottom: 0;
     height: 2px;
-    background: var(--ambar);
+    background: var(--mint);
     transform: scaleX(0);
     transform-origin: 0 50%;
-    /* scroll(root) explícito: não herdar scroller errado de ancestral */
     animation: regua-leitura linear both;
     animation-timeline: scroll(root);
   }
@@ -716,9 +1054,8 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
     to   { transform: scaleX(1); }
   }
 
-  /* cards empilhando — SÓ MOBILE. Decisão: empilham os 3 .eixo (capítulos
-     coerentes: título + 2 cartões); no desktop os eixos são colunas
-     lado a lado, empilhar não se aplica. Nunca os dois níveis. */
+  /* cards empilhando — SÓ MOBILE. Os 3 .eixo empilham; no desktop são
+     colunas lado a lado e empilhar não se aplica. */
   @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
     .eixos {
       view-timeline: --eixos block;
@@ -728,14 +1065,13 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
       position: sticky;
       /* fundo próprio: os cartões são translúcidos, sem isto o eixo
          de baixo vazaria através do de cima durante o empilhamento */
-      background: linear-gradient(175deg, #6a1f38, #591631);
+      background: linear-gradient(175deg, #0a5578, #094b68);
       border-radius: var(--raio);
       padding: 1.2rem 1.1rem;
-      box-shadow: 0 -10px 30px rgba(30, 8, 18, 0.35);
+      box-shadow: 0 -10px 30px rgba(4, 24, 35, 0.35);
       transform-origin: 50% 0;
     }
 
-    /* 3 eixos → fator 0.05: fim de curso 0.90/0.95/1, sem miniatura */
     .eixos > .eixo:nth-child(1) {
       top: 4.4rem;
       animation: eixo-encolhe linear both;
@@ -760,25 +1096,27 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   }
 }
 
-/* ---------- animação de entrada ---------- */
+/* ---------- animação de entrada (cards sobem ao entrar na tela) ---------- */
 
 .revela {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(26px);
+  transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1), transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: var(--atraso, 0s);
 }
 
-.revela.visivel { opacity: 1; transform: none; }
+/* transform via :where (especificidade zero): o hover dos cards e da
+   galeria (scale) precisa vencer depois que a entrada termina */
+.revela.visivel { opacity: 1; }
+:where(.revela.visivel) { transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .revela { opacity: 1; transform: none; transition: none; }
   .botao, .cta-fixo, .cartao, .galeria-item, .galeria-item img { transition: none; }
   .cartao:hover, .galeria-item:hover, .galeria-item:hover img { transform: none; }
-  /* marca: sem desenho de entrada; barra estática cheia (estado base).
-     Brilho da marca e respiração do halo ficam de propósito: micro-vida
-     de opacidade/brilho, sem transform — decisão deliberada. */
-  .marca::before { animation: none; }
+  .hero-seta { animation: none; }
+  /* o parallax do padrão é desligado no JS pelo mesmo media query */
 }
 
 /* ============================================================
@@ -786,25 +1124,17 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
    ============================================================ */
 
 @media (min-width: 760px) {
-  /* padding maior aqui deixa o header 2.7px mais alto: sem acertar a
-     variável o hero passa da dobra e aparece um resíduo de scroll */
-  :root { --topo-h: 4.17rem; }
+  :root { --topo-h: 4.3rem; }
 
-  .topo { padding: 0.9rem 2rem; }
-  .topo-nav a:not(.topo-cta) { display: inline; }
-
-  .hero-titulo br { display: inline; }
+  .topo { padding: 0.95rem 2rem; }
+  .topo-nav { display: flex; }
 
   .secao { padding: 5.5rem 0 6rem; }
 
-  .com-fio { padding-left: 2.6rem; }
-
-  /* 3 eixos lado a lado, cards empilhados dentro de cada um */
   .eixos { grid-template-columns: repeat(3, 1fr); gap: 2rem; grid-template-rows: auto 1fr; }
 
-  /* Títulos de 1 e de 2 linhas convivem. Com subgrid os três eixos
-     dividem as mesmas faixas, então os cards alinham por mais que o
-     título quebre — sem depender de min-height chutado. */
+  /* Títulos de 1 e de 2 linhas convivem: com subgrid os três eixos
+     dividem as mesmas faixas e os cards alinham. */
   .eixo { display: grid; grid-row: span 2; grid-template-rows: subgrid; }
   .eixo .cartoes, .eixo .cartao { height: 100%; }
 
@@ -813,14 +1143,10 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
     .eixo-titulo { min-height: 3.2em; }
   }
 
-  .depoimentos { grid-template-columns: 1fr 1fr; }
-
   .galeria { grid-template-columns: repeat(3, 1fr); }
 
-  /* bio à esquerda, linha do tempo à direita */
   .bio-grade { grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
 
-  /* convite à esquerda, formulário à direita */
   .participar-grade { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
   .formulario { margin-top: 0; }
@@ -828,55 +1154,81 @@ h2 { font-size: clamp(1.9rem, 5.5vw, 3rem); margin-bottom: 1.5rem; }
   .trajetoria { margin-top: 0; }
 
   .cta-fixo { display: none; }   /* CTA fixo é recurso mobile */
+
+  .rodape { padding: 3.5rem 0 3rem; }
+
+  /* pedido: rodapé em 3 colunas */
+  .rodape-grade {
+    grid-template-columns: 1.2fr 0.9fr 1.2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+}
+
+/* frase da identidade no header (pg 6) — só quando sobra largura */
+@media (min-width: 1280px) {
+  .topo-frase { display: block; }
 }
 
 /* ============================================================
-   Hero lado a lado — só quando há largura real pra isso.
-   Entre 760 e 899 o hero mantém o empilhado do mobile: nessa
-   faixa a foto e o texto disputam a mesma coluna e colidem.
+   Hero lado a lado (pg 6) — só quando há largura real pra isso.
+   Entre 760 e 899 o hero mantém o empilhado do mobile.
    ============================================================ */
 
 @media (min-width: 900px) {
   .hero {
-    flex-direction: row;
-    align-items: center;
-    padding: 8rem 0 6rem;
+    padding: 0;
+    display: block;
+    min-height: calc(100svh - var(--topo-h));
   }
 
-  /* desktop: sai do fluxo e volta a sangrar pela direita, atrás do texto */
+  /* foto central, meio corpo, ancorada na base (pg 6) */
   .hero-retrato {
     position: absolute;
-    flex: none;
-    min-height: 0;
-    margin-right: 0;
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 0;
-    /* foto nova é de corpo inteiro (proporção 0.41 contra 0.63 da antiga):
-       na mesma altura ela fica bem mais estreita, então sobe o teto pra
-       recuperar presença sem cortar a cabeça no topo do hero */
-    height: min(92svh, 46rem);
-    right: max(1vw, calc((100vw - var(--miolo)) / 2 - 4rem));
+    width: min(34vw, 30rem);
+    height: min(78svh, 46rem);
+    min-height: 0;
+    display: block;
   }
-
-  /* desktop: volta a ser dimensionada pela altura */
-  .hero-retrato img { width: auto; height: 100%; margin-left: 0; }
 
   .hero-retrato img {
-    -webkit-mask-image: none;
-    mask-image: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 0%;   /* folga do topo ja vem na propria imagem */
   }
 
-  /* O bloco segue a largura do miolo, alinhado com as outras seções.
-     Limitar o bloco (e não o texto) o centralizaria pelo margin auto
-     do .miolo, empurrando as linhas por cima da foto. */
-  /* teto de 56% (era 48%): a foto nova é mais estreita e libera coluna
-     pro texto, fechando o vão que abria no meio da composição */
-  .hero-titulo { max-width: min(38rem, 56%); }
-  .hero-frase { max-width: min(33rem, 56%); }
-  .hero-acoes { max-width: 56%; }
+  /* conteúdo em 2 colunas nas laterais da foto */
+  .hero-conteudo {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr minmax(30vw, 32rem) 1.2fr;
+    align-items: center;
+    gap: 0;
+    min-height: calc(100svh - var(--topo-h));
+    padding-top: 1rem;
+  }
 
-  /* A coluna de texto para em ~48%, mas o vw continua crescendo: sem um
-     teto menor a manchete estoura a coluna e quebra em 5 linhas. */
-  .hero-titulo { font-size: clamp(2.4rem, 4.6vw, 3.5rem); }
+  .hero-citacao { grid-column: 1; }
 
-  .hero-brilho { right: 2%; width: 55vw; height: 88svh; }
+  .hero-citacao p { font-size: clamp(1.25rem, 1.9vw, 1.7rem); }
+
+  .hero-lockup {
+    grid-column: 3;
+    justify-self: start;
+    padding-left: clamp(0.5rem, 2vw, 2.5rem);
+  }
+
+  .lockup-nome { width: min(30vw, 27rem); }
+  .lockup-numero { width: min(21vw, 19rem); }
+
+  .padrao { background-size: 240px auto; }
+
+  /* o miolo do hero pode ser mais largo que o das seções */
+  .hero .miolo { max-width: 86rem; }
 }

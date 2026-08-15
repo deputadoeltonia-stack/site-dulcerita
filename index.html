@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dulce Rita — Pré-candidata a Deputada Estadual por São Paulo</title>
-  <meta name="description" content="Dulce Rita, pré-candidata a deputada estadual por São Paulo. Cinco mandatos de vereadora em São José dos Campos, duas vezes a mais votada da cidade.">
-  <meta name="theme-color" content="#6d1f3a">
+  <title>Dulce Rita 44012 — Candidata a Deputada Estadual por São Paulo</title>
+  <meta name="description" content="Dulce Rita, candidata a deputada estadual por São Paulo. Vote 44012. Cinco mandatos de vereadora em São José dos Campos, duas vezes a mais votada da cidade.">
+  <meta name="theme-color" content="#094b68">
 
   <!-- Prévia ao compartilhar (WhatsApp, Instagram, Facebook).
        TROCAR og:url, og:image e twitter:image pela URL real após o deploy.
@@ -13,73 +13,130 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Dulce Rita">
-  <meta property="og:title" content="Dulce Rita — Pré-candidata a Deputada Estadual por São Paulo">
-  <meta property="og:description" content="Quem cuidou de São José quer cuidar de todo o Estado. Cinco mandatos de vereadora, duas vezes a mais votada da cidade.">
+  <meta property="og:title" content="Dulce Rita 44012 — Candidata a Deputada Estadual por São Paulo">
+  <meta property="og:description" content="Um coração que acolhe, uma voz que representa, uma vida dedicada às pessoas. Vote 44012.">
   <meta property="og:url" content="https://dulcerita.netlify.app/">
   <meta property="og:image" content="https://dulcerita.netlify.app/public/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Dulce Rita, pré-candidata a deputada estadual por São Paulo.">
+  <meta property="og:image:alt" content="Dulce Rita, candidata a deputada estadual por São Paulo. Número 44012.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Dulce Rita — Pré-candidata a Deputada Estadual por São Paulo">
-  <meta name="twitter:description" content="Quem cuidou de São José quer cuidar de todo o Estado. Cinco mandatos de vereadora, duas vezes a mais votada da cidade.">
+  <meta name="twitter:title" content="Dulce Rita 44012 — Candidata a Deputada Estadual por São Paulo">
+  <meta name="twitter:description" content="Um coração que acolhe, uma voz que representa, uma vida dedicada às pessoas. Vote 44012.">
   <meta name="twitter:image" content="https://dulcerita.netlify.app/public/assets/og-image.jpg">
 
   <link rel="icon" type="image/png" sizes="32x32" href="public/assets/favicon-32.png">
   <link rel="apple-touch-icon" href="public/assets/apple-touch-icon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Fontes oficiais da identidade (DULCE ID.pdf): Geometos p/ títulos,
+       Avenir p/ corpo — servidas do próprio site, sem Google Fonts. -->
+  <link rel="preload" as="font" type="font/woff2" href="public/fonts/geometos-black.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="public/fonts/avenir-400.woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css?v=28">
   <!-- foto do hero é o LCP: buscar cedo, não esperar o CSS resolver -->
   <link rel="preload" as="image" href="public/assets/dulce-rita.webp" fetchpriority="high">
 </head>
 <body>
 
   <header class="topo">
-    <a class="topo-marca" href="#inicio">Dulce Rita</a>
+    <a class="topo-marca" href="#inicio" aria-label="Dulce Rita — início">
+      <!-- logotipo oficial extraído do DULCE ID.pdf (vetor) -->
+      <svg class="logotipo" viewBox="94.0 60.8 320.8 43.2" role="img" aria-label="Dulce Rita">
+        <path d="M 106.99 92.92 L 111.47 92.92 C 115.53 92.92 120.99 90.08 120.99 82.12 C 120.99 74.04 115.47 71.14 111.47 71.14 L 106.99 71.14 L 106.99 92.92 M 93.98 103.32 L 93.98 60.79 L 111.99 60.79 C 125.06 60.79 134.01 69.22 134.01 82.06 C 134.01 94.96 125.12 103.32 111.99 103.32 L 93.98 103.32" fill="currentColor"/>
+        <path d="M 137.26 87.91 L 137.26 66.08 L 148.68 66.08 L 148.68 88.26 C 148.68 92.95 152.20 94.43 154.24 94.43 C 156.28 94.43 159.85 92.95 159.85 88.26 L 159.85 66.08 L 171.17 66.08 L 171.17 87.91 C 171.17 97.70 164.54 103.97 154.24 103.97 C 144.09 103.97 137.26 97.70 137.26 87.91" fill="currentColor"/>
+        <path d="M 198.85 94.28 L 198.85 103.41 L 174.82 103.41 L 174.82 66.08 L 186.30 66.08 L 186.30 94.28 L 198.85 94.28" fill="currentColor"/>
+        <path d="M 239.69 93.67 C 236.89 100.09 231.33 104.02 222.05 104.02 C 211.08 104.02 202.06 95.96 202.06 84.80 C 202.06 73.68 211.08 65.52 222.05 65.52 C 229.85 65.52 236.74 69.65 239.80 75.87 L 230.16 79.85 C 228.88 77.30 226.33 75.05 222.05 75.05 C 216.59 75.05 213.48 79.39 213.48 84.80 C 213.48 90.20 216.69 94.48 222.61 94.48 C 226.89 94.48 228.83 92.29 230.21 89.74 L 239.69 93.67" fill="currentColor"/>
+        <path d="M 254.36 75.21 L 254.36 80.15 L 266.44 80.15 L 266.44 89.28 L 254.36 89.28 L 254.36 94.28 L 272.72 94.28 L 272.72 103.41 L 242.99 103.41 L 242.99 66.08 L 272.72 66.08 L 272.72 75.21 L 254.36 75.21" fill="currentColor"/>
+        <path d="M 301.89 80.37 L 307.47 80.37 C 309.39 80.37 312.35 78.98 312.35 76.02 C 312.35 73.05 310.49 71.19 307.47 71.19 L 301.89 71.19 L 301.89 80.37 M 301.89 103.32 L 288.94 103.32 L 288.94 60.79 L 309.16 60.79 C 318.68 60.79 325.19 67.18 325.19 76.25 C 325.19 81.83 322.40 86.82 317.29 88.28 C 319.50 91.12 321.47 93.97 328.50 103.32 L 314.15 103.32 C 312.41 101.29 306.66 93.04 304.80 90.48 L 301.89 90.48 L 301.89 103.32" fill="currentColor"/>
+        <path d="M 331.65 66.09 L 342.99 66.09 L 342.99 103.32 L 331.65 103.32 Z" fill="currentColor"/>
+        <path d="M 377.32 75.20 L 367.65 75.20 L 367.65 103.32 L 356.31 103.32 L 356.31 75.20 L 346.65 75.20 L 346.65 66.09 L 377.32 66.09 L 377.32 75.20" fill="currentColor"/>
+        <path d="M 387.65 94.22 L 394.41 66.09 L 382.97 66.09 L 374.02 103.32 L 385.47 103.32 L 387.65 94.22" fill="currentColor"/>
+        <path d="M 401.17 94.22 L 394.41 66.09 L 405.86 66.09 L 414.80 103.32 L 403.36 103.32 L 401.17 94.22" fill="currentColor"/>
+      </svg>
+      <!-- coração oficial da identidade (DULCE ID.pdf) -->
+      <svg class="topo-coracao" viewBox="0 0 22.9 21.3" aria-hidden="true">
+        <path d="M 11.46 4.59 C 11.45 4.59 11.43 4.59 11.42 4.58 C 8.31 0.00 0.00 1.10 0.08 8.10 C 0.14 12.72 7.03 20.14 11.42 21.29 C 11.43 21.29 11.45 21.29 11.46 21.29 C 15.84 20.14 22.74 12.72 22.79 8.10 C 22.88 1.10 14.57 0.00 11.46 4.59" fill="currentColor"/>
+      </svg>
+    </a>
     <nav class="topo-nav" aria-label="Seções do site">
       <a href="#quem-sou">Quem sou</a>
       <a href="#propostas">Propostas</a>
       <a href="#depoimentos">Depoimentos</a>
       <a class="topo-cta" href="#participar">Quero participar</a>
     </nav>
+    <!-- frase da identidade (pg 6 do DULCE ID) — só em telas largas -->
+    <p class="topo-frase" aria-hidden="true">Onde existe uma necessidade, existe o coração de Dulce Rita ao lado de quem precisa</p>
   </header>
 
   <main>
 
-    <!-- ==================== HERO ==================== -->
+    <!-- ==================== HERO (pg 6 do DULCE ID) ==================== -->
     <section class="hero" id="inicio">
-      <div class="hero-brilho" aria-hidden="true"></div>
+      <!-- padrão oficial de pessoinhas, com parallax no scroll -->
+      <div class="padrao padrao-hero" data-parallax="0.25" aria-hidden="true"></div>
+
       <figure class="hero-retrato">
-        <!-- Foto oficial: recorte sem fundo em public/assets/dulce-rita.webp -->
-        <img src="public/assets/dulce-rita.webp" alt="Dulce Rita, pré-candidata a deputada estadual por São Paulo"
-             width="658" height="1600" fetchpriority="high" decoding="async"
+        <img src="public/assets/dulce-rita.webp" alt="Dulce Rita, candidata a deputada estadual por São Paulo"
+             width="639" height="1600" fetchpriority="high" decoding="async"
              onerror="this.closest('.hero-retrato').classList.add('sem-foto')">
       </figure>
+
       <div class="miolo hero-conteudo">
-        <p class="olho olho-claro">Pré-candidata a Deputada Estadual</p>
-        <h1 class="hero-titulo">
-          Quem cuidou<br>
-          de São José<br>
-          quer cuidar de<br>
-          <em class="marca">todo o Estado</em>.
-        </h1>
-        <p class="hero-frase">Vereadora por cinco mandatos em São José dos Campos. Duas vezes a mais votada da cidade.</p>
-        <div class="hero-acoes">
-          <a class="botao botao-ambar" href="#participar">Quero participar</a>
-          <a class="botao botao-linha" href="#propostas">Ver propostas</a>
+        <div class="hero-citacao">
+          <p>Um coração que <strong>acolhe</strong>, uma voz que <strong>representa</strong>, uma vida dedicada <strong>às pessoas</strong>.</p>
+          <div class="hero-acoes">
+            <a class="botao botao-lime" href="#participar">Quero participar</a>
+            <a class="botao botao-linha" href="#propostas">Ver propostas</a>
+          </div>
         </div>
+
+        <h1 class="hero-lockup">
+          <span class="sr-only">Dulce Rita, candidata a deputada estadual por São Paulo — vote 44012</span>
+          <span class="lockup-cargo" aria-hidden="true">
+            <svg class="lockup-barras" viewBox="0 0 30 48"><path d="M 10.5 0 L 21 0 L 10.5 48 L 0 48 Z" fill="currentColor"/><path d="M 25.5 0 L 30 0 L 19.5 48 L 15 48 Z" fill="currentColor"/></svg>
+            Deputada Estadual
+          </span>
+          <svg class="lockup-nome" viewBox="94.0 60.8 320.8 43.2" aria-hidden="true">
+            <path d="M 106.99 92.92 L 111.47 92.92 C 115.53 92.92 120.99 90.08 120.99 82.12 C 120.99 74.04 115.47 71.14 111.47 71.14 L 106.99 71.14 L 106.99 92.92 M 93.98 103.32 L 93.98 60.79 L 111.99 60.79 C 125.06 60.79 134.01 69.22 134.01 82.06 C 134.01 94.96 125.12 103.32 111.99 103.32 L 93.98 103.32" fill="currentColor"/>
+            <path d="M 137.26 87.91 L 137.26 66.08 L 148.68 66.08 L 148.68 88.26 C 148.68 92.95 152.20 94.43 154.24 94.43 C 156.28 94.43 159.85 92.95 159.85 88.26 L 159.85 66.08 L 171.17 66.08 L 171.17 87.91 C 171.17 97.70 164.54 103.97 154.24 103.97 C 144.09 103.97 137.26 97.70 137.26 87.91" fill="currentColor"/>
+            <path d="M 198.85 94.28 L 198.85 103.41 L 174.82 103.41 L 174.82 66.08 L 186.30 66.08 L 186.30 94.28 L 198.85 94.28" fill="currentColor"/>
+            <path d="M 239.69 93.67 C 236.89 100.09 231.33 104.02 222.05 104.02 C 211.08 104.02 202.06 95.96 202.06 84.80 C 202.06 73.68 211.08 65.52 222.05 65.52 C 229.85 65.52 236.74 69.65 239.80 75.87 L 230.16 79.85 C 228.88 77.30 226.33 75.05 222.05 75.05 C 216.59 75.05 213.48 79.39 213.48 84.80 C 213.48 90.20 216.69 94.48 222.61 94.48 C 226.89 94.48 228.83 92.29 230.21 89.74 L 239.69 93.67" fill="currentColor"/>
+            <path d="M 254.36 75.21 L 254.36 80.15 L 266.44 80.15 L 266.44 89.28 L 254.36 89.28 L 254.36 94.28 L 272.72 94.28 L 272.72 103.41 L 242.99 103.41 L 242.99 66.08 L 272.72 66.08 L 272.72 75.21 L 254.36 75.21" fill="currentColor"/>
+            <path d="M 301.89 80.37 L 307.47 80.37 C 309.39 80.37 312.35 78.98 312.35 76.02 C 312.35 73.05 310.49 71.19 307.47 71.19 L 301.89 71.19 L 301.89 80.37 M 301.89 103.32 L 288.94 103.32 L 288.94 60.79 L 309.16 60.79 C 318.68 60.79 325.19 67.18 325.19 76.25 C 325.19 81.83 322.40 86.82 317.29 88.28 C 319.50 91.12 321.47 93.97 328.50 103.32 L 314.15 103.32 C 312.41 101.29 306.66 93.04 304.80 90.48 L 301.89 90.48 L 301.89 103.32" fill="currentColor"/>
+            <path d="M 331.65 66.09 L 342.99 66.09 L 342.99 103.32 L 331.65 103.32 Z" fill="currentColor"/>
+            <path d="M 377.32 75.20 L 367.65 75.20 L 367.65 103.32 L 356.31 103.32 L 356.31 75.20 L 346.65 75.20 L 346.65 66.09 L 377.32 66.09 L 377.32 75.20" fill="currentColor"/>
+            <path d="M 387.65 94.22 L 394.41 66.09 L 382.97 66.09 L 374.02 103.32 L 385.47 103.32 L 387.65 94.22" fill="currentColor"/>
+            <path d="M 401.17 94.22 L 394.41 66.09 L 405.86 66.09 L 414.80 103.32 L 403.36 103.32 L 401.17 94.22" fill="currentColor"/>
+          </svg>
+          <span class="lockup-voto" aria-hidden="true">
+            <!-- número 44012 no desenho original (Gunterz) extraído do ID -->
+            <svg class="lockup-numero" viewBox="1020.0 525.5 550.7 112.3">
+              <path d="M 1081.32 591.38 L 1088.33 547.34 L 1053.42 591.38 L 1081.32 591.38 M 1077.54 615.50 L 1020.04 615.50 L 1023.83 591.38 L 1074.73 529.11 L 1123.81 529.11 L 1113.86 591.38 L 1126.90 591.38 L 1123.11 615.50 L 1110.07 615.50 L 1107.12 634.29 L 1074.59 634.29 L 1077.54 615.50" fill="currentColor"/>
+              <path d="M 1196.73 591.38 L 1203.74 547.34 L 1168.82 591.38 L 1196.73 591.38 M 1192.94 615.50 L 1135.45 615.50 L 1139.23 591.38 L 1190.14 529.11 L 1239.22 529.11 L 1229.26 591.38 L 1242.31 591.38 L 1238.52 615.50 L 1225.48 615.50 L 1222.53 634.29 L 1190.00 634.29 L 1192.94 615.50" fill="currentColor"/>
+              <path d="M 1328.54 581.70 C 1331.21 564.17 1327.00 553.65 1313.54 553.65 C 1299.94 553.65 1292.36 564.59 1289.56 581.70 C 1286.89 598.81 1291.10 609.75 1304.56 609.75 C 1318.17 609.75 1325.74 598.81 1328.54 581.70 M 1317.89 525.61 C 1349.16 525.61 1366.97 544.82 1361.08 581.70 C 1355.19 618.58 1331.35 637.79 1300.08 637.79 C 1268.94 637.79 1251.14 618.58 1257.02 581.70 C 1262.77 544.82 1286.61 525.61 1317.89 525.61" fill="currentColor"/>
+              <path d="M 1428.52 609.61 L 1452.92 609.61 L 1449.00 634.29 L 1367.66 634.29 L 1371.59 609.61 L 1395.99 609.61 L 1403.42 562.77 C 1395.57 568.10 1387.02 572.16 1377.20 574.41 L 1381.41 547.90 C 1393.61 543.98 1400.90 538.09 1408.75 529.11 L 1441.29 529.11 L 1428.52 609.61" fill="currentColor"/>
+              <path d="M 1558.24 609.61 L 1554.31 634.29 L 1463.30 634.29 L 1466.10 616.20 C 1471.15 584.50 1532.57 579.32 1535.66 559.54 C 1536.50 554.21 1530.75 551.13 1523.88 551.13 C 1516.31 551.13 1507.47 554.91 1504.81 563.75 L 1474.66 561.23 C 1480.55 540.05 1497.65 525.47 1530.05 525.47 C 1558.80 525.47 1570.72 538.79 1567.77 558.14 C 1561.88 595.16 1509.01 600.91 1504.67 609.61 L 1558.24 609.61" fill="currentColor"/>
+            </svg>
+            <svg class="lockup-coracao" viewBox="0 0 22.9 21.3" aria-hidden="true">
+              <path d="M 11.46 4.59 C 11.45 4.59 11.43 4.59 11.42 4.58 C 8.31 0.00 0.00 1.10 0.08 8.10 C 0.14 12.72 7.03 20.14 11.42 21.29 C 11.43 21.29 11.45 21.29 11.46 21.29 C 15.84 20.14 22.74 12.72 22.79 8.10 C 22.88 1.10 14.57 0.00 11.46 4.59" fill="currentColor"/>
+            </svg>
+          </span>
+        </h1>
       </div>
+
+      <a class="hero-seta" href="#quem-sou" aria-label="Rolar para a próxima seção">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+      </a>
     </section>
 
     <!-- ==================== QUEM SOU EU ==================== -->
     <section class="secao" id="quem-sou">
-      <div class="miolo com-fio">
-        <span class="no" aria-hidden="true"></span>
-        <p class="olho">Quem sou eu</p>
-        <h2>Uma vida dedicada<br>a cuidar das pessoas</h2>
+      <div class="miolo">
+        <header class="secao-cabeca">
+          <svg class="secao-icone" viewBox="0 0 55.5 65.5" aria-hidden="true"><path d="M 27.74 19.92 L 13.90 19.92 L 0.03 64.64 L 13.87 64.64 L 27.74 19.92" fill="currentColor"/><path d="M 27.74 19.92 L 41.58 19.92 L 55.39 64.64 L 41.55 64.64 L 27.74 19.92" fill="currentColor"/><path d="M 37.51 10.17 C 37.51 15.57 33.11 19.95 27.69 19.95 C 22.26 19.95 17.86 15.57 17.86 10.17 C 17.86 4.78 22.26 0.40 27.69 0.40 C 33.11 0.40 37.51 4.78 37.51 10.17" fill="currentColor"/></svg>
+          <h2>Uma vida dedicada a cuidar <span class="destaque">das pessoas</span></h2>
+          <p class="secao-linha">Quem cuidou de São José quer cuidar de todo o Estado.</p>
+        </header>
         <div class="bio-grade">
         <div class="prosa">
           <p class="prosa-abre">Dulce Rita nasceu em Campos do Jordão e é joseense de coração. Foi em São José dos Campos que formou família, fez carreira e construiu mais de três décadas de vida pública.</p>
@@ -111,7 +168,7 @@
           </li>
           <li>
             <span class="traj-ano">2026</span>
-            <div><h3>Pré-candidata a deputada estadual</h3><p>Leva para a Assembleia Legislativa o que aprendeu em cinco mandatos.</p></div>
+            <div><h3>Candidata a deputada estadual</h3><p>Leva para a Assembleia Legislativa o que aprendeu em cinco mandatos.</p></div>
           </li>
         </ol>
         </div>
@@ -119,11 +176,13 @@
     </section>
 
     <!-- ==================== PROPOSTAS ==================== -->
-    <section class="secao secao-vinho" id="propostas">
-      <div class="miolo com-fio">
-        <span class="no" aria-hidden="true"></span>
-        <p class="olho olho-claro">Propostas</p>
-        <h2>O que a Dulce leva<br>para a Assembleia</h2>
+    <section class="secao secao-navy" id="propostas">
+      <div class="padrao padrao-secao" data-parallax="0.12" aria-hidden="true"></div>
+      <div class="miolo">
+        <header class="secao-cabeca">
+          <svg class="secao-icone" viewBox="0 0 55.5 65.5" aria-hidden="true"><path d="M 27.74 19.92 L 13.90 19.92 L 0.03 64.64 L 13.87 64.64 L 27.74 19.92" fill="currentColor"/><path d="M 27.74 19.92 L 41.58 19.92 L 55.39 64.64 L 41.55 64.64 L 27.74 19.92" fill="currentColor"/><path d="M 37.51 10.17 C 37.51 15.57 33.11 19.95 27.69 19.95 C 22.26 19.95 17.86 15.57 17.86 10.17 C 17.86 4.78 22.26 0.40 27.69 0.40 C 33.11 0.40 37.51 4.78 37.51 10.17" fill="currentColor"/></svg>
+          <h2>O que a Dulce leva para a <span class="destaque destaque-lime">Assembleia</span></h2>
+        </header>
         <div class="eixos">
 
         <div class="eixo">
@@ -188,10 +247,11 @@
 
     <!-- ==================== DEPOIMENTOS ==================== -->
     <section class="secao" id="depoimentos">
-      <div class="miolo com-fio">
-        <span class="no" aria-hidden="true"></span>
-        <p class="olho">Depoimentos</p>
-        <h2>Quem conhece, confia</h2>
+      <div class="miolo">
+        <header class="secao-cabeca">
+          <svg class="secao-icone" viewBox="0 0 55.5 65.5" aria-hidden="true"><path d="M 27.74 19.92 L 13.90 19.92 L 0.03 64.64 L 13.87 64.64 L 27.74 19.92" fill="currentColor"/><path d="M 27.74 19.92 L 41.58 19.92 L 55.39 64.64 L 41.55 64.64 L 27.74 19.92" fill="currentColor"/><path d="M 37.51 10.17 C 37.51 15.57 33.11 19.95 27.69 19.95 C 22.26 19.95 17.86 15.57 17.86 10.17 C 17.86 4.78 22.26 0.40 27.69 0.40 C 33.11 0.40 37.51 4.78 37.51 10.17" fill="currentColor"/></svg>
+          <h2>Quem conhece, <span class="destaque">confia</span></h2>
+        </header>
         <!-- Depoimentos reais enviados pela campanha (22/07).
              PENDENTE: confirmar autorização de cada pessoa para publicar
              com o nome. Dois citam tratamento de saúde de familiar. -->
@@ -226,30 +286,76 @@
           </blockquote>
         </div>
 
+        <!-- Depoimentos em vídeo (13/08). Fonte bruta em assets-src/videos-src
+             (fora do deploy); public/assets/videos gerado por
+             scripts/build-videos.sh (H.264 720px + poster). -->
+        <div class="video-depoimentos" aria-label="Depoimentos em vídeo">
+          <button type="button" class="video-item" data-video="public/assets/videos/monica-porto.mp4" data-nome="Mônica Porto" data-cargo="">
+            <img src="public/assets/videos/monica-porto.webp" alt="" width="720" height="1280" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-legenda"><strong>Mônica Porto</strong></span>
+          </button>
+          <button type="button" class="video-item" data-video="public/assets/videos/carlos-eugenio-de-melo.mp4" data-nome="Carlos" data-cargo="Comerciante do bairro: Eugênio de Melo">
+            <img src="public/assets/videos/carlos-eugenio-de-melo.webp" alt="" width="720" height="405" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-legenda"><strong>Carlos</strong><br>Comerciante do bairro: Eugênio de Melo</span>
+          </button>
+          <button type="button" class="video-item" data-video="public/assets/videos/celia-galo-branco.mp4" data-nome="Célia" data-cargo="Moradora do Residencial Galo Branco">
+            <img src="public/assets/videos/celia-galo-branco.webp" alt="" width="720" height="405" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-legenda"><strong>Célia</strong><br>Moradora do Residencial Galo Branco</span>
+          </button>
+          <button type="button" class="video-item" data-video="public/assets/videos/milton-claret.mp4" data-nome="Milton Claret" data-cargo="Empresário do Galo Branco">
+            <img src="public/assets/videos/milton-claret.webp" alt="" width="720" height="405" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-legenda"><strong>Milton Claret</strong><br>Empresário do Galo Branco</span>
+          </button>
+          <button type="button" class="video-item" data-video="public/assets/videos/amelia-claret.mp4" data-nome="Amélia Claret" data-cargo="Comerciante do Residencial Galo Branco">
+            <img src="public/assets/videos/amelia-claret.webp" alt="" width="720" height="405" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-legenda"><strong>Amélia Claret</strong><br>Comerciante do Residencial Galo Branco</span>
+          </button>
+          <button type="button" class="video-item" data-video="public/assets/videos/ana-julia.mp4" data-nome="Ana Júlia" data-cargo="Residencial Galo Branco">
+            <img src="public/assets/videos/ana-julia.webp" alt="" width="720" height="405" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-legenda"><strong>Ana Júlia</strong><br>Residencial Galo Branco</span>
+          </button>
+          <button type="button" class="video-item" data-video="public/assets/videos/paulo-roberto.mp4" data-nome="Paulo Roberto" data-cargo="Servidor aposentado da Câmara Municipal de São José dos Campos">
+            <img src="public/assets/videos/paulo-roberto.webp" alt="" width="720" height="405" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-legenda"><strong>Paulo Roberto</strong><br>Servidor aposentado da Câmara Municipal de SJC</span>
+          </button>
+          <button type="button" class="video-item" data-video="public/assets/videos/ivan-eugenio-de-melo.mp4" data-nome="Ivan" data-cargo="Comerciante no distrito de Eugênio de Melo">
+            <img src="public/assets/videos/ivan-eugenio-de-melo.webp" alt="" width="720" height="405" loading="lazy" decoding="async">
+            <span class="video-play" aria-hidden="true"></span>
+            <span class="video-legenda"><strong>Ivan</strong><br>Comerciante no distrito de Eugênio de Melo</span>
+          </button>
+        </div>
+
         <!-- Fotos da campanha (30/07). Legendas descrevem o que aparece;
              CONFERIR local/evento de cada uma com a equipe e ajustar. -->
         <div class="galeria" aria-label="Fotos da campanha">
-          <figure class="galeria-item">
+          <figure class="galeria-item" tabindex="0" role="button" aria-haspopup="dialog" data-indice="0">
             <img src="public/assets/galeria-1.webp" alt="Dulce Rita abraça uma apoiadora na rua" width="1200" height="900" loading="lazy" decoding="async">
             <figcaption>Abraço na caminhada</figcaption>
           </figure>
-          <figure class="galeria-item">
+          <figure class="galeria-item" tabindex="0" role="button" aria-haspopup="dialog" data-indice="1">
             <img src="public/assets/galeria-2.webp" alt="Dulce Rita discursa ao microfone" width="1200" height="900" loading="lazy" decoding="async">
             <figcaption>Com a palavra</figcaption>
           </figure>
-          <figure class="galeria-item">
+          <figure class="galeria-item" tabindex="0" role="button" aria-haspopup="dialog" data-indice="2">
             <img src="public/assets/galeria-3.webp" alt="Dulce Rita reunida com um grupo de mulheres" width="1200" height="900" loading="lazy" decoding="async">
             <figcaption>Com mulheres empreendedoras</figcaption>
           </figure>
-          <figure class="galeria-item">
+          <figure class="galeria-item" tabindex="0" role="button" aria-haspopup="dialog" data-indice="3">
             <img src="public/assets/galeria-4.webp" alt="Dulce Rita com um grupo de jovens" width="1200" height="900" loading="lazy" decoding="async">
             <figcaption>Com a juventude</figcaption>
           </figure>
-          <figure class="galeria-item">
+          <figure class="galeria-item" tabindex="0" role="button" aria-haspopup="dialog" data-indice="4">
             <img src="public/assets/galeria-5.webp" alt="Dulce Rita conversa com uma comerciante numa banca" width="1200" height="900" loading="lazy" decoding="async">
             <figcaption>No comércio do bairro</figcaption>
           </figure>
-          <figure class="galeria-item">
+          <figure class="galeria-item" tabindex="0" role="button" aria-haspopup="dialog" data-indice="5">
             <img src="public/assets/galeria-6.webp" alt="Dulce Rita com moradores na rua" width="1200" height="900" loading="lazy" decoding="async">
             <figcaption>Nas ruas, perto das pessoas</figcaption>
           </figure>
@@ -258,13 +364,15 @@
     </section>
 
     <!-- ==================== QUERO PARTICIPAR ==================== -->
-    <section class="secao secao-vinho" id="participar">
-      <div class="miolo com-fio">
-        <span class="no no-fim" aria-hidden="true"></span>
-        <p class="olho olho-claro">Quero participar</p>
+    <section class="secao secao-navy" id="participar">
+      <div class="padrao padrao-secao" data-parallax="0.12" aria-hidden="true"></div>
+      <div class="miolo">
         <div class="participar-grade">
         <div>
-          <h2>Entre para a rede<br>da Dulce</h2>
+          <header class="secao-cabeca secao-cabeca-esq">
+            <svg class="secao-icone" viewBox="0 0 55.5 65.5" aria-hidden="true"><path d="M 27.74 19.92 L 13.90 19.92 L 0.03 64.64 L 13.87 64.64 L 27.74 19.92" fill="currentColor"/><path d="M 27.74 19.92 L 41.58 19.92 L 55.39 64.64 L 41.55 64.64 L 27.74 19.92" fill="currentColor"/><path d="M 37.51 10.17 C 37.51 15.57 33.11 19.95 27.69 19.95 C 22.26 19.95 17.86 15.57 17.86 10.17 C 17.86 4.78 22.26 0.40 27.69 0.40 C 33.11 0.40 37.51 4.78 37.51 10.17" fill="currentColor"/></svg>
+            <h2>Entre para a <span class="destaque destaque-lime">rede</span> da Dulce</h2>
+          </header>
           <p class="prosa-clara">Deixe seu nome e telefone. A equipe entra em contato para você receber novidades e participar da campanha na sua cidade.</p>
         </div>
 
@@ -286,7 +394,7 @@
             <input type="checkbox" id="lgpd" name="lgpd" required>
             <label for="lgpd">Autorizo o uso do meu nome e telefone para contato desta campanha, conforme a LGPD. Posso pedir a exclusão dos meus dados a qualquer momento pelos canais no rodapé.</label>
           </div>
-          <button type="submit" class="botao botao-ambar">Quero participar</button>
+          <button type="submit" class="botao botao-lime">Quero participar</button>
           <p class="form-retorno" id="form-retorno" role="status" aria-live="polite"></p>
         </form>
         </div>
@@ -294,36 +402,91 @@
     </section>
   </main>
 
-  <!-- ==================== RODAPÉ ==================== -->
+  <!-- ==================== RODAPÉ (3 colunas) ==================== -->
   <footer class="rodape">
     <div class="miolo rodape-grade">
-      <div>
-        <p class="rodape-nome">Dulce Rita</p>
+      <div class="rodape-marca">
+        <svg class="logotipo logotipo-rodape" viewBox="94.0 60.8 320.8 43.2" role="img" aria-label="Dulce Rita">
+          <path d="M 106.99 92.92 L 111.47 92.92 C 115.53 92.92 120.99 90.08 120.99 82.12 C 120.99 74.04 115.47 71.14 111.47 71.14 L 106.99 71.14 L 106.99 92.92 M 93.98 103.32 L 93.98 60.79 L 111.99 60.79 C 125.06 60.79 134.01 69.22 134.01 82.06 C 134.01 94.96 125.12 103.32 111.99 103.32 L 93.98 103.32" fill="currentColor"/>
+          <path d="M 137.26 87.91 L 137.26 66.08 L 148.68 66.08 L 148.68 88.26 C 148.68 92.95 152.20 94.43 154.24 94.43 C 156.28 94.43 159.85 92.95 159.85 88.26 L 159.85 66.08 L 171.17 66.08 L 171.17 87.91 C 171.17 97.70 164.54 103.97 154.24 103.97 C 144.09 103.97 137.26 97.70 137.26 87.91" fill="currentColor"/>
+          <path d="M 198.85 94.28 L 198.85 103.41 L 174.82 103.41 L 174.82 66.08 L 186.30 66.08 L 186.30 94.28 L 198.85 94.28" fill="currentColor"/>
+          <path d="M 239.69 93.67 C 236.89 100.09 231.33 104.02 222.05 104.02 C 211.08 104.02 202.06 95.96 202.06 84.80 C 202.06 73.68 211.08 65.52 222.05 65.52 C 229.85 65.52 236.74 69.65 239.80 75.87 L 230.16 79.85 C 228.88 77.30 226.33 75.05 222.05 75.05 C 216.59 75.05 213.48 79.39 213.48 84.80 C 213.48 90.20 216.69 94.48 222.61 94.48 C 226.89 94.48 228.83 92.29 230.21 89.74 L 239.69 93.67" fill="currentColor"/>
+          <path d="M 254.36 75.21 L 254.36 80.15 L 266.44 80.15 L 266.44 89.28 L 254.36 89.28 L 254.36 94.28 L 272.72 94.28 L 272.72 103.41 L 242.99 103.41 L 242.99 66.08 L 272.72 66.08 L 272.72 75.21 L 254.36 75.21" fill="currentColor"/>
+          <path d="M 301.89 80.37 L 307.47 80.37 C 309.39 80.37 312.35 78.98 312.35 76.02 C 312.35 73.05 310.49 71.19 307.47 71.19 L 301.89 71.19 L 301.89 80.37 M 301.89 103.32 L 288.94 103.32 L 288.94 60.79 L 309.16 60.79 C 318.68 60.79 325.19 67.18 325.19 76.25 C 325.19 81.83 322.40 86.82 317.29 88.28 C 319.50 91.12 321.47 93.97 328.50 103.32 L 314.15 103.32 C 312.41 101.29 306.66 93.04 304.80 90.48 L 301.89 90.48 L 301.89 103.32" fill="currentColor"/>
+          <path d="M 331.65 66.09 L 342.99 66.09 L 342.99 103.32 L 331.65 103.32 Z" fill="currentColor"/>
+          <path d="M 377.32 75.20 L 367.65 75.20 L 367.65 103.32 L 356.31 103.32 L 356.31 75.20 L 346.65 75.20 L 346.65 66.09 L 377.32 66.09 L 377.32 75.20" fill="currentColor"/>
+          <path d="M 387.65 94.22 L 394.41 66.09 L 382.97 66.09 L 374.02 103.32 L 385.47 103.32 L 387.65 94.22" fill="currentColor"/>
+          <path d="M 401.17 94.22 L 394.41 66.09 L 405.86 66.09 L 414.80 103.32 L 403.36 103.32 L 401.17 94.22" fill="currentColor"/>
+        </svg>
+        <p class="rodape-voto" aria-label="Vote 44012">
+          <svg class="rodape-numero" viewBox="1020.0 525.5 550.7 112.3" aria-hidden="true">
+            <path d="M 1081.32 591.38 L 1088.33 547.34 L 1053.42 591.38 L 1081.32 591.38 M 1077.54 615.50 L 1020.04 615.50 L 1023.83 591.38 L 1074.73 529.11 L 1123.81 529.11 L 1113.86 591.38 L 1126.90 591.38 L 1123.11 615.50 L 1110.07 615.50 L 1107.12 634.29 L 1074.59 634.29 L 1077.54 615.50" fill="currentColor"/>
+            <path d="M 1196.73 591.38 L 1203.74 547.34 L 1168.82 591.38 L 1196.73 591.38 M 1192.94 615.50 L 1135.45 615.50 L 1139.23 591.38 L 1190.14 529.11 L 1239.22 529.11 L 1229.26 591.38 L 1242.31 591.38 L 1238.52 615.50 L 1225.48 615.50 L 1222.53 634.29 L 1190.00 634.29 L 1192.94 615.50" fill="currentColor"/>
+            <path d="M 1328.54 581.70 C 1331.21 564.17 1327.00 553.65 1313.54 553.65 C 1299.94 553.65 1292.36 564.59 1289.56 581.70 C 1286.89 598.81 1291.10 609.75 1304.56 609.75 C 1318.17 609.75 1325.74 598.81 1328.54 581.70 M 1317.89 525.61 C 1349.16 525.61 1366.97 544.82 1361.08 581.70 C 1355.19 618.58 1331.35 637.79 1300.08 637.79 C 1268.94 637.79 1251.14 618.58 1257.02 581.70 C 1262.77 544.82 1286.61 525.61 1317.89 525.61" fill="currentColor"/>
+            <path d="M 1428.52 609.61 L 1452.92 609.61 L 1449.00 634.29 L 1367.66 634.29 L 1371.59 609.61 L 1395.99 609.61 L 1403.42 562.77 C 1395.57 568.10 1387.02 572.16 1377.20 574.41 L 1381.41 547.90 C 1393.61 543.98 1400.90 538.09 1408.75 529.11 L 1441.29 529.11 L 1428.52 609.61" fill="currentColor"/>
+            <path d="M 1558.24 609.61 L 1554.31 634.29 L 1463.30 634.29 L 1466.10 616.20 C 1471.15 584.50 1532.57 579.32 1535.66 559.54 C 1536.50 554.21 1530.75 551.13 1523.88 551.13 C 1516.31 551.13 1507.47 554.91 1504.81 563.75 L 1474.66 561.23 C 1480.55 540.05 1497.65 525.47 1530.05 525.47 C 1558.80 525.47 1570.72 538.79 1567.77 558.14 C 1561.88 595.16 1509.01 600.91 1504.67 609.61 L 1558.24 609.61" fill="currentColor"/>
+          </svg>
+          <img src="public/assets/marca/pessoinhas-trio.svg" alt="" width="167" height="111">
+        </p>
         <p class="rodape-slogan">Sempre com você.</p>
       </div>
-      <nav class="rodape-social" aria-label="Redes sociais">
-        <a href="https://www.instagram.com/dulceritaoficial/" target="_blank" rel="noopener" aria-label="Instagram de Dulce Rita">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="https://www.facebook.com/vereadoradulcerita/" target="_blank" rel="noopener" aria-label="Facebook de Dulce Rita">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h2.5V4.5H14A4.5 4.5 0 0 0 9.5 9v2.5H7V15h2.5v5.5H13V15h2.5l.5-3.5h-3V9c0-.6.4-1 1-1z"/></svg>
-        </a>
-        <!-- TROCAR: número real do WhatsApp em wa.me/55DDDNUMERO -->
-        <a href="#" aria-label="WhatsApp de Dulce Rita">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M8.8 9.2c.3-.8.9-.8 1.2-.1l.5 1c.1.3 0 .6-.2.8l-.4.4c.5 1 1.4 1.9 2.4 2.4l.4-.4c.2-.2.5-.3.8-.2l1 .5c.7.3.7.9-.1 1.2-2.8 1.2-6.6-2.6-5.6-5.6z"/></svg>
-        </a>
+
+      <nav class="rodape-nav" aria-label="Rodapé">
+        <p class="rodape-titulo">Navegue</p>
+        <a href="#quem-sou">Quem sou</a>
+        <a href="#propostas">Propostas</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#participar">Quero participar</a>
+        <div class="rodape-social">
+          <a href="https://www.instagram.com/dulceritaoficial/" target="_blank" rel="noopener" aria-label="Instagram de Dulce Rita">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.facebook.com/vereadoradulcerita/" target="_blank" rel="noopener" aria-label="Facebook de Dulce Rita">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h2.5V4.5H14A4.5 4.5 0 0 0 9.5 9v2.5H7V15h2.5v5.5H13V15h2.5l.5-3.5h-3V9c0-.6.4-1 1-1z"/></svg>
+          </a>
+          <!-- TROCAR: número real do WhatsApp em wa.me/55DDDNUMERO -->
+          <a href="#" aria-label="WhatsApp de Dulce Rita">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M8.8 9.2c.3-.8.9-.8 1.2-.1l.5 1c.1.3 0 .6-.2.8l-.4.4c.5 1 1.4 1.9 2.4 2.4l.4-.4c.2-.2.5-.3.8-.2l1 .5c.7.3.7.9-.1 1.2-2.8 1.2-6.6-2.6-5.6-5.6z"/></svg>
+          </a>
+        </div>
       </nav>
-      <p class="rodape-legal">
-        <!-- TROCAR: CNPJ da campanha quando o registro sair -->
-        Material de pré-campanha · Dulce Rita · Federação União Progressista · São Paulo/SP.<br>
-        Para excluir seus dados, escreva pelo WhatsApp acima.
-      </p>
+
+      <div class="rodape-info">
+        <p class="rodape-titulo">Informações</p>
+        <p class="rodape-legal">
+          Material de pré-campanha · Dulce Rita · Federação União Progressista · São Paulo/SP.<br>
+          CNPJ 68.283.179/0001-75.<br>
+          Para excluir seus dados, escreva pelo WhatsApp.
+        </p>
+      </div>
     </div>
   </footer>
 
   <!-- CTA fixo (mobile) -->
-  <a class="cta-fixo botao botao-ambar" href="#participar" id="cta-fixo">Quero participar</a>
+  <a class="cta-fixo botao botao-lime" href="#participar" id="cta-fixo">Quero participar</a>
 
-  <script src="js/main.js"></script>
+  <!-- Lightbox da galeria: <dialog> nativo cuida de foco, backdrop e Esc -->
+  <dialog class="lightbox" id="lightbox" aria-label="Foto ampliada">
+    <button type="button" class="lightbox-fechar" aria-label="Fechar">✕</button>
+    <button type="button" class="lightbox-nav lightbox-anterior" aria-label="Foto anterior">‹</button>
+    <figure>
+      <img class="lightbox-img" id="lightbox-img" src="" alt="">
+      <figcaption class="lightbox-legenda" id="lightbox-legenda"></figcaption>
+    </figure>
+    <button type="button" class="lightbox-nav lightbox-proxima" aria-label="Próxima foto">›</button>
+  </dialog>
+
+  <!-- Player dos depoimentos em vídeo: src só entra ao abrir (lazy) -->
+  <dialog class="video-lightbox" id="video-lightbox" aria-label="Depoimento em vídeo">
+    <button type="button" class="lightbox-fechar" aria-label="Fechar">✕</button>
+    <button type="button" class="lightbox-nav lightbox-anterior" aria-label="Depoimento anterior">‹</button>
+    <figure>
+      <video class="video-lightbox-player" id="video-lightbox-player" controls playsinline></video>
+      <figcaption class="lightbox-legenda" id="video-lightbox-legenda"></figcaption>
+    </figure>
+    <button type="button" class="lightbox-nav lightbox-proxima" aria-label="Próximo depoimento">›</button>
+  </dialog>
+
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>
