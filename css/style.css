@@ -325,9 +325,10 @@ h2 {
   /* sem drop-shadow: a sombra de 40px em volta da silhueta escurecia o
      padrão atrás e lia como um "quadrado meio transparente" na foto */
   filter: contrast(1.04) saturate(1.02);
-  /* base dissolve no padrão em vez de cortar reto */
-  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 9%);
-  mask-image: linear-gradient(to top, transparent 0%, #000 9%);
+  /* base dissolve no padrão em vez de cortar reto — faixa curta (3%), só
+     o suficiente pra matar a linha reta do corte */
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 3%);
+  mask-image: linear-gradient(to top, transparent 0%, #000 3%);
 }
 
 .sem-foto { display: none; }
