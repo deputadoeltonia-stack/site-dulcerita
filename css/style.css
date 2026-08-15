@@ -419,9 +419,12 @@ h2 {
   overflow: clip;
 }
 
+/* navy um tom acima do oficial: o #094b68 puro deixava o texto do corpo
+   pesado demais pra leitura corrida. O navy fechado fica no hero e no
+   rodapé (blocos curtos); as seções de leitura usam esta faixa clara. */
 .secao-navy {
   color: var(--off);
-  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-fundo) 100%);
+  background: linear-gradient(180deg, #0b5c7e 0%, #0a5271 100%);
 }
 
 .secao-navy h2 { color: var(--branco); }
@@ -481,14 +484,36 @@ h2 {
 .eixos { display: grid; gap: 2.4rem; }
 
 /* subtítulo em Avenir (regra do user: Geometos só pra destaque) */
+/* subtítulo dos eixos: centralizado sobre a coluna, com um filete lime
+   embaixo pra dar peso sem sair da Avenir (Geometos é só destaque) */
 .eixo-titulo {
   font-family: var(--fonte-corpo);
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 2.6vw, 1.22rem);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+  line-height: 1.28;
   color: var(--lime);
+  text-align: center;
+  text-wrap: balance;
   margin-bottom: 1rem;
+  /* o filete acompanha o texto (não a coluna inteira): inline-block dentro
+     de um bloco centralizado deixaria o ::after do tamanho da caixa toda */
+  display: grid;
+  justify-items: center;
+  /* no desktop o subgrid estica esta caixa até a altura do maior título
+     (2 linhas); ancorar o conteúdo no fim deixa os três filetes na mesma
+     linha e à mesma distância do cartão */
+  align-content: end;
+  gap: 0.6rem;
+}
+
+.eixo-titulo::after {
+  content: "";
+  width: 2.4rem;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--lime);
 }
 
 .cartoes { display: grid; gap: 1rem; }
@@ -893,10 +918,17 @@ h2 {
 
 /* ---------- formulário ---------- */
 
-.participar-grade { display: grid; gap: 2rem; }
+/* convite + formulário centralizados como um par: as duas colunas dividem
+   o miolo pelo próprio conteúdo (max-content) em vez de esticar até as
+   bordas, senão sobra um rio de vazio entre elas no desktop */
+.participar-grade { display: grid; gap: 1rem; justify-content: center; }
+
+/* no empilhado a prosa já traz a própria margem; a margem dupla abria um
+   buraco entre o convite e o primeiro campo */
+.participar-grade .prosa-clara { margin-bottom: 0.5rem; }
 
 .formulario {
-  max-width: 28rem;
+  width: min(100%, 28rem);
   display: grid;
   gap: 1.1rem;
   margin-top: 0.5rem;
@@ -993,7 +1025,7 @@ h2 {
 
 .rodape-nav > a:hover { color: var(--branco); text-decoration: underline; text-underline-offset: 4px; }
 
-.rodape-social { display: flex; gap: 0.9rem; margin-top: 0.9rem; }
+.rodape-social { display: flex; gap: 0.9rem; margin-top: 1.3rem; }
 
 .rodape-social a {
   display: grid;
@@ -1147,7 +1179,14 @@ h2 {
 
   .bio-grade { grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
 
-  .participar-grade { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  /* colunas pelo conteúdo (não 1fr 1fr): o convite tem ~30rem de texto e o
+     form 28rem — esticados até as bordas do miolo de 72rem sobrava um vão
+     morto no meio. Assim o par fica centralizado e colado. */
+  .participar-grade {
+    grid-template-columns: minmax(0, 30rem) minmax(0, 28rem);
+    gap: 3.5rem;
+    align-items: center;
+  }
 
   .formulario { margin-top: 0; }
 
