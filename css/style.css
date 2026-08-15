@@ -921,6 +921,10 @@ h2 {
 /* convite + formulário centralizados como um par: as duas colunas dividem
    o miolo pelo próprio conteúdo (max-content) em vez de esticar até as
    bordas, senão sobra um rio de vazio entre elas no desktop */
+/* seção mais compacta que as outras: é um bloco de ação curto (convite +
+   4 campos), o respiro padrão de 4rem/4.5rem deixava vazio dos dois lados */
+#participar { padding: 2.6rem 0 3rem; }
+
 .participar-grade { display: grid; gap: 1rem; justify-content: center; }
 
 /* no empilhado a prosa já traz a própria margem; a margem dupla abria um
@@ -1182,6 +1186,8 @@ h2 {
   /* colunas pelo conteúdo (não 1fr 1fr): o convite tem ~30rem de texto e o
      form 28rem — esticados até as bordas do miolo de 72rem sobrava um vão
      morto no meio. Assim o par fica centralizado e colado. */
+  #participar { padding: 3.6rem 0 4rem; }
+
   .participar-grade {
     grid-template-columns: minmax(0, 30rem) minmax(0, 28rem);
     gap: 3.5rem;
