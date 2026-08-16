@@ -69,7 +69,7 @@ def og():
     foto = foto.resize((round(foto.width * alt / foto.height), alt), Image.LANCZOS)
     img.alpha_composite(foto.crop((0, 0, foto.width, H)), (W - foto.width + 10, 0))
 
-    # lockup à esquerda: // DEPUTADA ESTADUAL + logo + 44012 + pessoinhas
+    # lockup à esquerda: // DEPUTADA ESTADUAL + logo + 44400 + pessoinhas
     x = 64
     d = ImageDraw.Draw(img)
     # barras // em lime
@@ -79,7 +79,7 @@ def og():
     logo = svg_png(f"{MARCA}/logo-dulce.svg", cor=OFF, largura=560)
     img.alpha_composite(logo, (x, 236))
 
-    numero = svg_png(f"{MARCA}/digitos-44012.svg", cor=(255, 255, 255), largura=430)
+    numero = svg_png(f"{MARCA}/digitos-44400.svg", cor=(255, 255, 255), largura=430)
     img.alpha_composite(numero, (x, 340))
 
     trio = svg_png(f"{MARCA}/pessoinhas-trio.svg", largura=110)
