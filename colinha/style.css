@@ -63,7 +63,9 @@
 
 [hidden] { display: none !important; }
 
-html { -webkit-text-size-adjust: 100%; }
+/* clip, nao hidden: a vinheta do rosto sangra da folha e nao pode virar
+   rolagem lateral; clip corta sem criar contexto de scroll novo */
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
 
 body {
   margin: 0;
@@ -465,7 +467,7 @@ body:is([data-tema="tozi"], [data-tema="dulce"]) .visto-marca { display: none; }
 /* Os passos da peça são numerados em azul, não no verde do Dr. Elton. O vão à
    direita é onde o rosto entra. */
 body[data-tema="tozi"] .passos {
-  flex: 1; min-width: 0; padding-right: 6rem; font-size: .8rem;
+  flex: 1; min-width: 0; padding-right: 4.2rem; font-size: .8rem;
 }
 body[data-tema="tozi"] .passos li::before {
   background: var(--acento); color: #fff;
@@ -476,13 +478,21 @@ body:is([data-tema="elton"], [data-tema="tozi"], [data-tema="dulce"]) .folha {
   position: relative;
   padding-top: 1.6rem;
 }
+/* O card do aviso ("Comecar de novo") e o primeiro elemento da folha — bem
+   onde o queixo da vinheta desce. Termina antes dela. */
+body[data-tema="tozi"] .aviso { margin-right: 3.8rem; }
+
+/* O rosto em traco invade do topo para o corpo, vinheta de canto com a cara
+   da peca. Sangra forte pela direita: o que ficaria por cima da tecla e das
+   caixas e cortado pela borda, entao nada util fica por baixo. */
 body[data-tema="tozi"] .folha::before {
   content: "";
   position: absolute; z-index: 1; pointer-events: none;
-  right: .3rem; top: -4.9rem;
+  right: -2rem; top: -4.9rem;
   width: 5.6rem; height: 8.8rem;
   background: url("marca/rosto.svg") center/contain no-repeat;
 }
+
 /* O selo (movido para cá pelo app.js) ocupa o vazio à direita dos senadores,
    que só têm 3 dígitos — o mesmo lugar que ele tem na peça. */
 /* O selo vive dentro do campo do senador (1º voto) e transborda sobre o de

@@ -33,10 +33,16 @@ export const CANDIDATOS = {
   // Sem estes aliases o hostname dele cairia no PADRAO e abriria a colinha
   // do Dr. Elton dentro do site do Tozi.
   'tozisite.vercel.app': { alias: 'colinhavirtual.dreltonai.com.br' },
+  'tozisite-elton8.vercel.app': { alias: 'colinhavirtual.dreltonai.com.br' },
+  'tozisite-git-main-elton8.vercel.app': { alias: 'colinhavirtual.dreltonai.com.br' },
   'proftozi.com.br': { alias: 'colinhavirtual.dreltonai.com.br' },
   'www.proftozi.com.br': { alias: 'colinhavirtual.dreltonai.com.br' },
-  // Site da Dulce Rita (site-dulcerita, deploy Vercel) tambem embute /colinha/.
-  'site-dulcerita.vercel.app': { alias: 'colinha2026.dreltonai.com.br' },
+  // Site da Dulce Rita (projeto Vercel "dulcesite") tambem embute /colinha/.
+  // Dominio de producao e sitedulce.vercel.app — um alias errado aqui abre a
+  // colinha do Dr. Elton dentro do site dela, em silencio.
+  'sitedulce.vercel.app': { alias: 'colinha2026.dreltonai.com.br' },
+  'dulcesite-elton8.vercel.app': { alias: 'colinha2026.dreltonai.com.br' },
+  'dulcesite-git-main-elton8.vercel.app': { alias: 'colinha2026.dreltonai.com.br' },
   // Numero confirmado pelo santinho impresso 7x10 da campanha (15/08/2026).
   'colinha2026.dreltonai.com.br': {
     nome: 'DULCE RITA', cargo: 7, numero: '44400', partido: 'UNIÃO', tema: 'dulce',
