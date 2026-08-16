@@ -1088,13 +1088,13 @@ h2 {
 /* marca do partido: mesma família visual do logotipo do rodapé (off-white
    sobre navy), num corpo menor — é assinatura institucional, não marca
    principal. Opacidade leve pra não competir com o lockup da candidata. */
-/* marca da federação: entra com o azul do próprio lockup, então ganha
-   cantos arredondados pra assentar como bloco sobre o navy do rodapé.
-   Sem opacidade: mexer na cor de marca partidária descaracteriza. */
+/* marca da federação: mesmas medidas dos sites do Tozi e do Dr. Elton
+   (lockup horizontal transparente, 190px de teto e opacidade .92) */
 .rodape-partido {
-  width: 6.4rem;
+  display: block;
+  width: min(190px, 66%);
   height: auto;
-  border-radius: 8px;
+  opacity: 0.92;
   margin-bottom: 1rem;
 }
 
