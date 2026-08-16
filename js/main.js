@@ -3,7 +3,11 @@
 
   // Destino dos leads. Vazio = modo demo (nada sai do browser).
   // Quando conectar: URL do Apps Script /exec, mesmo padrão do evento-fotos.
-  const LEAD_ENDPOINT = "";
+  const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbyBdY45weHbgTSWLBt0ymfRSHPmz4vHVGdEiu13T3o3yGejT36JiGPauMrxmv-vRz-j/exec";
+
+  // Mesma planilha dos sites do Dr. Elton e do Tozi; `origem` e o campo que
+  // manda o lead para a aba "Pagina Dulce" em vez da aba padrao.
+  const LEAD_ORIGEM = "site-dulcerita";
 
   /* ---------- máscara de telefone BR ---------- */
   const telefone = document.getElementById("telefone");
@@ -61,10 +65,22 @@
       method: "POST",
       // text/plain evita preflight CORS no Apps Script
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ nome: nome, telefone: fone, consentimento: true }),
+      body: JSON.stringify({ nome: nome, telefone: fone, consentimento_lgpd: true, origem: LEAD_ORIGEM }),
     })
       .then(function (r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
+        // O Apps Script responde 200 mesmo recusando o lead ({ok:false}).
+        return r.text().then(function (t) {
+          try {
+            const j = JSON.parse(t);
+            if (j && j.ok === false) throw new Error(j.msg || "recusado");
+          } catch (e) {
+            if (e instanceof SyntaxError) return;  // corpo opaco: 200 ja basta
+            throw e;
+          }
+        });
+      })
+      .then(function () {
         avisar("Recebido! A equipe da Dulce fala com você em breve.", true);
         form.reset();
       })
