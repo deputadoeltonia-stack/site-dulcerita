@@ -41,6 +41,9 @@ export const CANDIDATOS = {
   'colinha2026.dreltonai.com.br': {
     nome: 'DULCE RITA', cargo: 7, numero: '44400', partido: 'UNIÃO', tema: 'dulce',
     foto: 'dulce', rotulo: 'Deputada estadual', // flexao do cargo, so no campo dela
+    // O verso do santinho dela ja vem com o federal (Dr. Elton, peca conjunta)
+    // e o governador preenchidos. Sugestao = editavel, como no tema do Elton.
+    sugestao: { federal: '4412', governador: '10' },
   },
 }
 
