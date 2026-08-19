@@ -377,8 +377,10 @@ function desenharTopo(ctx, t, simbolo, padrao) {
 
   ctx.font = fonte(t, 500, COND, 29, { texto: true })
   ctx.fillStyle = 'rgba(255,255,255,.93)'
-  ctx.fillText('Confira o nome de cada candidato antes de votar.', MARGEM, 146)
-  ctx.fillText('4 de outubro de 2026 · São Paulo', MARGEM, 184)
+  // Uma linha so; a data da eleicao saiu do cabecalho a pedido da campanha.
+  // Base em 180 (TOPO e 210): fica logo acima da borda da faixa, afastada do
+  // titulo, como a segunda linha ficava antes.
+  ctx.fillText('Confira o nome de cada candidato antes de votar.', MARGEM, 180)
 }
 
 // Divide o nome em ate duas linhas, quebrando no espaco mais proximo do meio.
