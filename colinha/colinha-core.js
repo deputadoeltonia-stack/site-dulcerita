@@ -25,10 +25,9 @@ export const CANDIDATOS = {
     razao: 'ELEIÇÃO 2026 ELTON ALVES RIBEIRO DE CARVALHO JUNIOR DEPUTADO FEDERAL',
     cnpj: '68.237.359/0001-10',
     foto: 'elton', // fotos/elton.jpg — foto oficial da campanha, nao vem do TSE
-    // A peca impressa dele ja traz o governador (Tarcisio, 10). Fixo, como na
-    // colinha da Dulce: o slot nao existe no estado, entao nao ha caminho de
-    // escrita por URL nem por localStorage. Nome e foto seguem do TSE.
-    fixos: { governador: '10' },
+    // Sem governador pre-preenchido. A peca impressa dele traz o Tarcisio (10),
+    // mas na tela o campo abre VAZIO: o voto de governador e do eleitor, e
+    // nem travado (`fixos`) nem sugerido (`sugestao`) cabia aqui.
   },
   // Numero confirmado pelo santinho impresso 7x10 da campanha (15/08/2026).
   'colinhavirtual.dreltonai.com.br': {
@@ -37,9 +36,9 @@ export const CANDIDATOS = {
     razao: 'ELEIÇÃO 2026 LUIZ ANTONIO TOZI DEPUTADO ESTADUAL',
     cnpj: '68.283.009/0001-90',
     foto: 'tozi',
-    // A peca conjunta dele traz o Dr. Elton e o governador impressos, igual a
-    // da Dulce — e fixos pelo mesmo motivo: o eleitor nao muda nenhum dos dois.
-    fixos: { federal: '4412', governador: '10' },
+    // A peca conjunta dele traz o Dr. Elton impresso — fixo pelo mesmo
+    // motivo da Dulce, o eleitor nao muda esse. Governador destravado.
+    fixos: { federal: '4412' },
   },
   // O site do Tozi embute a colinha em /colinha/ (site-tozi, deploy Vercel).
   // Sem estes aliases o hostname dele cairia no PADRAO e abriria a colinha
@@ -78,12 +77,264 @@ export const CANDIDATOS = {
     razao: 'ELEIÇÃO 2026 DULCE RITA CHAVES DE ANDRADE DABKIWIC',
     cnpj: '68.283.179/0001-75',
     foto: 'dulce', rotulo: 'Deputada estadual', // flexao do cargo, so no campo dela
-    // O verso do santinho dela ja vem com o federal (Dr. Elton, peca conjunta)
-    // e o governador impressos. FIXO, nao sugestao: o eleitor nao muda nenhum
-    // dos dois, e a garantia e a mesma do campo dela — nenhum desses slots
-    // existe no objeto de estado, entao nao ha caminho de escrita nem por URL
-    // nem por localStorage.
-    fixos: { federal: '4412', governador: '10' },
+    // O verso do santinho dela vem com o federal (Dr. Elton, peca conjunta)
+    // impresso. FIXO, nao sugestao: a garantia e a mesma do campo dela — o
+    // slot nao existe no objeto de estado, entao nao ha caminho de escrita
+    // nem por URL nem por localStorage.
+    //
+    // O governador saiu daqui: era o Tarcisio 10, e o campo passa a ser do
+    // eleitor.
+    fixos: { federal: '4412' },
+  },
+}
+
+// --- santinhos 9x5 ------------------------------------------------------
+// A peca 9x5 e a versao digital do verso impresso: o que ja vem impresso e
+// travado, o que vem em branco o eleitor completa. Em geral e uma peca
+// conjunta (parceiro estadual + Dr. Elton), mas o Dr. Elton tambem tem a
+// dele sozinho — por isso o registro nao se chama mais PARCEIROS.
+//
+// Cada santinho tem subdominio proprio, e a rota /c/<slug> vale de reserva.
+// O slug so ESCOLHE uma entrada daqui: nao carrega nome nem numero. A
+// garantia central continua a mesma do resto do produto — numero e nome saem
+// da config e so da config, e slot travado nao existe no objeto de estado.
+//
+// Todos os subdominios vivem em drelton4412.com.br, nunca em
+// dreltonai.com.br: o segundo resolve num VPS da Hostinger, e o eleitor que
+// aponta a camera bateria naquele servidor antes de chegar na colinha.
+export const SANTINHOS = {
+  leandro: {
+    nome: 'LEANDRO CÉSAR', cargo: 7, numero: '44012', partido: 'UNIÃO',
+    tema: 'santinho', rotulo: 'Deputado estadual',
+    // Cor das caixas e do disco da foto DELE. Na peca do Leandro e o mesmo
+    // lima do Dr. Elton; na do Rogerio, o ambar dele. E o unico eixo que muda
+    // de um santinho para o outro.
+    cor: '#cddc00',
+    // Foto do TSE (SQ_CANDIDATO 250002533739): mesma pessoa e mesmo terno da
+    // peca impressa. Nao ha arte de campanha separada para ele, entao nao ha
+    // arquivo proprio em fotos/ como o elton.jpg das outras tres.
+    foto: '250002533739',
+    // Subdominio proprio, como o do Rogerio: a raiz ja abre esta colinha, sem
+    // /c/ e sem parametro. Em drelton4412.com.br (HostGator dos nameservers
+    // ao IP), nunca em dreltonai.com.br, que passa pela Hostinger.
+    hosts: ['leandro.drelton4412.com.br', 'www.leandro.drelton4412.com.br'],
+    // Marcacao legal da propaganda (Lei 9.504/97, art. 38 §1o), da lateral do
+    // santinho. As outras tres campanhas montam a frase de razao + cnpj; aqui
+    // a peca traz os dois CNPJs, e sao eles que a lei pede.
+    //
+    // A tiragem ("30.000 unidades") fica de FORA: ela e a quantidade de
+    // exemplares do impresso, exigida do material grafico. Uma colinha na
+    // tela nao tem exemplar nem quantidade — copiada para ca a frase vira
+    // informacao falsa sobre o proprio meio em que esta sendo lida.
+    legal: [
+      'CNPJ Candidato: 68.283.009/0001-90',
+      'CNPJ Contratado: 10.386.377/0001-84',
+    ],
+    // O Dr. Elton vem impresso na peca: FIXO, nao sugestao. Governador e
+    // presidente ficam em branco no santinho, entao ficam livres aqui — ao
+    // contrario da peca do proprio Dr. Elton, que ja traz o governador.
+    fixos: { federal: '4412' },
+  },
+  rogerio: {
+    nome: 'ROGÉRIO FRANCO', cargo: 7, numero: '22999', partido: 'PL',
+    tema: 'santinho', rotulo: 'Deputado estadual',
+    cor: '#f4be38', // ambar da peca dele, medido na pagina 2 do PDF
+    foto: '250002536405',
+    // Subdominio proprio: a raiz dele ja abre esta colinha, sem /c/ e sem
+    // parametro, o que da o QR mais curto possivel para a peca impressa.
+    //
+    // Em drelton4412.com.br, NAO em dreltonai.com.br: o segundo tem DNS e IP
+    // na Hostinger (o reverso do 187.127.17.18 e srv1779079.hstgr.cloud) e o
+    // eleitor que aponta a camera bate naquele servidor antes de chegar na
+    // colinha. Este dominio e HostGator dos nameservers ao IP, e o
+    // subdominio nasce no proprio cPanel — nada fora dele no caminho.
+    hosts: ['rogerio.drelton4412.com.br', 'www.rogerio.drelton4412.com.br'],
+    // Os mesmos dois CNPJs da peca do Leandro, como impresso na lateral.
+    legal: [
+      'CNPJ Candidato: 68.283.009/0001-90',
+      'CNPJ Contratado: 10.386.377/0001-84',
+    ],
+    // SEM `fixos`: esta peca deixou de trazer o Dr. Elton impresso, entao o
+    // campo de deputado federal fica livre para o eleitor preencher. As
+    // outras pecas conjuntas (Leandro, Anistaldo, Tozi, Dulce) seguem com ele.
+  },
+  anistaldo: {
+    nome: 'PASTOR ANISTALDO', cargo: 7, numero: '20147', partido: 'PODE',
+    tema: 'santinho', rotulo: 'Deputado estadual',
+    // Roxo da identidade DELE (#5C3583, pagina 11 do manual "Logos, numero e
+    // identidade visual"), nao o lima do Dr. Elton: ele e o unico parceiro
+    // com manual proprio. O amarelo (#F3E32E) e o verde (#22AE49) da paleta
+    // ficam de fora — aqui so entra a cor das caixas e do disco da foto.
+    cor: '#5C3583',
+    // Foto do TSE (SQ_CANDIDATO 250002545138), ja versionada em fotos/.
+    // Nao ha arte de campanha separada para ele.
+    foto: '250002545138',
+    // Subdominio proprio, como o do Leandro e o do Rogerio: a raiz ja abre
+    // esta colinha, sem /c/ e sem parametro. Em drelton4412.com.br, nunca em
+    // dreltonai.com.br, que passa pela Hostinger.
+    hosts: ['anistaldo.drelton4412.com.br', 'www.anistaldo.drelton4412.com.br'],
+    // Os mesmos dois CNPJs das pecas do Leandro e do Rogerio: quem contrata a
+    // impressao e a campanha do Dr. Elton, e a marcacao legal segue o
+    // contratante, nao o partido do parceiro (ele e do PODE).
+    legal: [
+      'CNPJ Candidato: 68.283.009/0001-90',
+      'CNPJ Contratado: 10.386.377/0001-84',
+    ],
+    fixos: { federal: '4412' },
+  },
+  regina: {
+    nome: 'REGINA NUNES', cargo: 7, numero: '15115', partido: 'MDB',
+    tema: 'santinho', rotulo: 'Deputada estadual', // flexao do cargo, como no da Dulce
+    // Laranja da identidade dela (#f9b004, do PDF de cores), que e a cor do
+    // NOME na arte. O navy da box (#212c52) e o azul (#14387f) seriam mais
+    // fieis a peca, mas o fundo desta tela ja e navy: a caixa sumiria nele
+    // (1.18:1 e 1.45:1). O laranja destaca (8.57:1) e cai no mesmo padrao do
+    // lima do Elton, do ambar do Rogerio e do mint da Dulce.
+    cor: '#f9b004',
+    // Foto do TSE (SQ_CANDIDATO 250002534251), ja versionada em fotos/.
+    foto: '250002534251',
+    hosts: ['regina.drelton4412.com.br', 'www.regina.drelton4412.com.br'],
+    // Marcacao legal da propaganda (Lei 9.504/97, art. 38 §1o). O CNPJ e o da
+    // CAMPANHA DELA, lido na ficha oficial do DivulgaCandContas (eleicao
+    // 20322002026, SQ_CANDIDATO 250002534251) — nao o mesmo das pecas do
+    // Leandro, do Rogerio e do Anistaldo, que trazem o da campanha do Tozi.
+    //
+    // Sem "CNPJ Contratado": aquele e o da grafica que imprime, e esta
+    // colinha nao veio de peca impressa nenhuma — o material dela chegou como
+    // identidade visual, nao como arte de santinho. Inventar um contratado
+    // seria afirmar uma contratacao que ninguem declarou.
+    legal: [
+      'CNPJ Candidato: 68.293.771/0001-58',
+    ],
+    // So ela e o Dr. Elton, como nas outras pecas conjuntas. A faixa de
+    // aliados que veio no material dela (senador 222 e 111, governador 10,
+    // presidente 22) NAO entra: travar os quatro tirava do eleitor os unicos
+    // votos que sobravam para ele decidir.
+    fixos: { federal: '4412' },
+  },
+  tozi: {
+    nome: 'PROFESSOR TOZI', cargo: 7, numero: '44447', partido: 'UNIÃO',
+    tema: 'santinho', rotulo: 'Deputado estadual',
+    cor: '#0057c3', // azul da peca dele, medido na pagina 2 do PDF
+    foto: 'tozi',
+    // Dominio DELE: a campanha do Tozi e outra conta de HostGator, noutro
+    // servidor (ns856, 192.185.131.84). Por isso o santinho dele nao mora em
+    // drelton4412.com.br como os outros — cada peca vive no dominio da
+    // campanha que a imprime.
+    // TODOS os enderecos do Tozi abrem esta peca, nao so o subdominio dela.
+    // colinhavirtual.dreltonai.com.br (o QR impresso em julho) NAO entra na
+    // lista: ele responde 301 para proftozi44447.com.br/colinha/, entao o app
+    // nunca roda naquele hostname — quem resolve e o destino, que esta aqui.
+    // Duas colinhas diferentes para o mesmo candidato — uma clara no site,
+    // outra escura no QR — divergem em silencio: a primeira que alguem
+    // esquecer de atualizar vira a que mostra o numero velho. A entrada de
+    // tema 'tozi' em CANDIDATOS segue existindo para ?campanha=tozi em
+    // localhost, mas nenhum hostname de producao cai mais nela.
+    hosts: [
+      'santinho.proftozi44447.com.br', 'www.santinho.proftozi44447.com.br',
+      'proftozi44447.com.br', 'www.proftozi44447.com.br',
+      'proftozi.com.br', 'www.proftozi.com.br',
+      'tozisite.vercel.app', 'tozisite-elton8.vercel.app',
+      'tozisite-git-main-elton8.vercel.app',
+    ],
+    legal: [
+      'CNPJ Candidato: 68.283.009/0001-90',
+      'CNPJ Contratado: 10.386.377/0001-84',
+    ],
+    fixos: { federal: '4412' },
+  },
+  dulce: {
+    nome: 'DULCE RITA', cargo: 7, numero: '44400', partido: 'UNIÃO',
+    tema: 'santinho', rotulo: 'Deputada estadual', // flexao do cargo, so no dela
+    cor: '#27d9c4', // mint da peca dela, medido na pagina 2 do PDF
+    foto: 'dulce',
+    // Terceira conta de HostGator, terceiro servidor (ns815, 50.116.87.219).
+    // Como no Tozi: TODOS os enderecos dela abrem esta peca, nao so o
+    // subdominio. Duas colinhas do mesmo candidato divergem em silencio — a
+    // primeira que alguem esquecer de atualizar vira a que mostra o numero
+    // velho. A entrada de tema 'dulce' em CANDIDATOS segue existindo para
+    // ?campanha=dulce em localhost.
+    //
+    // colinha2026.dreltonai.com.br (o QR impresso) fica de fora: responde 301
+    // para dulcerita44400.com.br/colinha/, entao o app nunca roda naquele
+    // hostname — quem resolve e o destino, que esta aqui.
+    hosts: [
+      'santinho.dulcerita44400.com.br', 'www.santinho.dulcerita44400.com.br',
+      'dulcerita44400.com.br', 'www.dulcerita44400.com.br',
+      'sitedulce.vercel.app', 'dulcesite-elton8.vercel.app',
+      'dulcesite-git-main-elton8.vercel.app',
+    ],
+    legal: [
+      'CNPJ Candidato: 68.283.009/0001-90',
+      'CNPJ Contratado: 10.386.377/0001-84',
+    ],
+    fixos: { federal: '4412' },
+  },
+  // A peca 9x5 do Dr. Elton SOZINHO. Nao e a colinha dele que ja existe em
+  // colinha.drelton4412.com.br: aquela e a peca antiga, de tema claro e com o
+  // governador travado no Tarcisio. Esta deixa TODOS os outros cargos em
+  // branco — inclusive o de governador —, e as duas convivem porque o QR
+  // impresso em julho aponta para a antiga.
+  elton: {
+    nome: 'DR. ELTON', cargo: 6, numero: '4412', partido: 'UNIÃO',
+    tema: 'santinho', rotulo: 'Deputado federal',
+    cor: '#cddc00',
+    foto: '250002532326',
+    hosts: ['santinho.drelton4412.com.br', 'www.santinho.drelton4412.com.br'],
+    legal: [
+      'CNPJ Candidato: 68.283.009/0001-90',
+      'CNPJ Contratado: 10.386.377/0001-84',
+    ],
+    // Sem `fixos`: nesta peca o Dr. Elton e o DONO, nao um aliado impresso, e
+    // nenhum outro cargo vem preenchido do papel.
+  },
+  // A "colinha completa" (peca impressa 30/08): a chapa INTEIRA travada, dos
+  // deputados ao presidente. E a excecao deliberada a regra das outras pecas
+  // — aqui a peca imprime os seis numeros, e a versao digital replica a peca.
+  // Quem quiser montar a propria colinha usa a colinha comum.
+  colinhacompleta: {
+    nome: 'DR. ELTON', cargo: 6, numero: '4412', partido: 'UNIÃO',
+    tema: 'santinho', rotulo: 'Deputado federal',
+    cor: '#cddc00',
+    // Foto de campanha (fotos/elton.jpg), como no circulo verde da peca —
+    // nao a do TSE que o santinho solo usa.
+    foto: 'elton',
+    hosts: [
+      'colinhacompleta.drelton4412.com.br',
+      'www.colinhacompleta.drelton4412.com.br',
+    ],
+    // CNPJs lidos na lateral da propria peca (30/08). O candidato e o da
+    // campanha do Dr. Elton — e a peca DELE, nao das pecas conjuntas do Tozi.
+    // A tiragem ("180.000 unidades") fica de fora, como no Leandro: e do
+    // impresso, nao da tela.
+    legal: [
+      'CNPJ Candidato: 68.237.359/0001-10',
+      'CNPJ Contratado: 03.188.474/0001-05',
+    ],
+    // Na IMAGEM salva a peca sai na diagramacao da arte final: aliados com
+    // foto quadrada ao lado das caixas e so o rotulo do cargo, disco + nome
+    // grande so do Dr. Elton, QR, tecla CONFIRMA. As pecas conjuntas
+    // (Leandro, Dulce...) nao levam a flag: nelas o Elton aliado aparece
+    // COM nome, que e como o verso impresso delas e.
+    aliadoCompacto: true,
+    // O QR da propria peca, dentro do quadro branco. O arquivo ja aponta
+    // para colinhacompleta.drelton4412.com.br. Em marca/ porque o deploy
+    // (build/enviar_sftp.py) so envia as pastas do rol — arquivo solto na
+    // raiz nao sobe.
+    qr: 'marca/qr-colinhacompleta.png',
+    // Flexao do rotulo na IMAGEM, como impresso na peca (a fileira e da
+    // Dulce Rita). So no desenho: na tela o rotulo generico do cargo segue
+    // valendo, com o nome resolvido ao lado.
+    rotulos: { estadual: 'Deputada estadual' },
+    // Os cinco aliados impressos na peca. Numero vem daqui e so daqui; nome,
+    // sigla e foto resolvem no dataset do TSE, como em todo `fixos`.
+    fixos: {
+      estadual: '44400',   // DULCE RITA
+      senador1: '222',     // ANDRÉ DO PRADO
+      senador2: '111',     // GUILHERME DERRITE
+      governador: '10',    // TARCÍSIO
+      presidente: '22',    // FLAVIO BOLSONARO
+    },
   },
 }
 
@@ -105,6 +356,30 @@ export function hostDeDev(hostname, busca) {
   const tema = new URLSearchParams(busca ?? '').get('campanha')
   const achado = Object.entries(CANDIDATOS).find(([, c]) => c.tema === tema)
   return achado ? achado[0] : PADRAO
+}
+
+// Ponto unico de resolucao da pagina: santinho de parceiro primeiro, senao a
+// campanha pelo hostname. O QR impresso aponta para /c/<slug>, que redireciona
+// para a raiz com ?p=<slug> — na raiz os caminhos relativos de fotos/, fonts/
+// e do dataset continuam valendo, o que nao seria verdade servindo o app de
+// dentro de /c/.
+//
+// Um ?p= desconhecido cai na resolucao normal, calada: o parametro escolhe
+// entre entradas aprovadas do registro, nunca inventa uma. E o mesmo motivo
+// pelo qual ?campanha= so vale em localhost.
+export function configDaRota(hostname, busca) {
+  // O hostname vem PRIMEIRO, e por isso o ?p= nao vale num subdominio de
+  // parceiro: senao rogerio.dreltonai.com.br/?p=leandro abriria a colinha do
+  // Leandro dentro do site do Rogerio. Mesmo motivo pelo qual ?campanha= so
+  // funciona em localhost — endereco proprio mostra o dono dele, e ponto.
+  const dono = Object.values(SANTINHOS).find((c) => c.hosts?.includes(hostname))
+  if (dono) return dono
+
+  const slug = new URLSearchParams(busca ?? '').get('p')
+  // hasOwn, nao SANTINHOS[slug]: ?p=__proto__ devolve Object.prototype, que e
+  // um objeto truthy — a pagina abriria sem nome, sem numero e sem tema.
+  if (slug && Object.hasOwn(SANTINHOS, slug)) return SANTINHOS[slug]
+  return configPara(hostDeDev(hostname, busca))
 }
 
 export function buscar(dados, cargo, numero) {

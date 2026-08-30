@@ -1,12 +1,15 @@
 import {
-  CARGOS, configPara, hostDeDev, criarEstado, lerURL, lerSalvo, paraSalvar,
+  CARGOS, configDaRota, criarEstado, lerURL, lerSalvo, paraSalvar,
   montarColinha, erroSenadores, estaCompleta, slotTravado, limpar, linkDeVolta,
   buscarGlobal,
 } from './colinha-core.js'
 import { desenhar } from './imagem.js'
 import { configurarBusca, abrirBusca } from './busca.js'
 
-const CHAVE = 'colinha-sp-2026'
+// Chave da persistencia que existiu ate 30/08/2026. Nada mais grava aqui; a
+// linha abaixo so limpa o que ficou no aparelho de quem ja usou a colinha —
+// escolha de voto nao pode sobreviver no celular emprestado.
+try { localStorage.removeItem('colinha-sp-2026') } catch { /* sem storage */ }
 
 // Adesivo oficial de cada campanha, extraido do material em vetor. Campanha
 // sem arte cai no selo montado com texto (o do Tozi).
@@ -15,7 +18,7 @@ const BADGE = {
   dulce: 'marca/selo-dulce.png', // adesivo do santinho 7x10, ja com o 44400
 }
 
-const config = configPara(hostDeDev(location.hostname, location.search))
+const config = configDaRota(location.hostname, location.search)
 let dados = {}
 let estado = criarEstado(config)
 
@@ -31,12 +34,31 @@ const el = {
 
 document.body.dataset.tema = config.tema
 
+// Cor do candidato dono do santinho (as caixas e a moldura da foto DELE). E
+// o unico eixo que muda de um parceiro para o outro, entao vem da config e
+// nao do tema — o CSS cai no lima da campanha quando ela nao existe.
+if (config.cor) document.body.style.setProperty('--cor-parceiro', config.cor)
+
 // Marcacao legal da propaganda: razao social e CNPJ da campanha. Le da config
 // e so da config, como o selo e o campo travado — nunca do dataset do TSE.
-if (config.cnpj) {
-  const legal = document.getElementById('legal')
-  legal.textContent = `${config.razao} · CNPJ ${config.cnpj}`
-  legal.hidden = false
+// config.legal (santinho de parceiro) traz o texto ja pronto, linha por
+// linha, como impresso na lateral da peca; as campanhas proprias montam a
+// frase de razao social + CNPJ.
+{
+  const linhas = config.legal ?? (config.cnpj ? [`${config.razao} · CNPJ ${config.cnpj}`] : null)
+  if (linhas) {
+    const legal = document.getElementById('legal')
+    // Uma linha por span, cada um sem quebra interna: em 390px o texto
+    // corrido partia dentro do proprio CNPJ ("...0001-" / "90"), que e o
+    // numero que alguem vai conferir. Entre spans a linha quebra normal.
+    legal.replaceChildren(...linhas.flatMap((linha, i) => {
+      const span = document.createElement('span')
+      span.className = 'legal-item'
+      span.textContent = linha
+      return i ? [' · ', span] : [span]
+    }))
+    legal.hidden = false
+  }
 }
 
 // Embutida num site, a pagina ganha o link de volta para a raiz dele.
@@ -192,7 +214,6 @@ function aoDigitar(cargo, input) {
   const limpo = limpar(input.value, cargo.digitos)
   if (input.value !== limpo) input.value = limpo
   estado[cargo.id] = limpo
-  salvar()
   render()
   if (limpo.length === cargo.digitos) focarProximo(cargo.id)
 }
@@ -264,63 +285,8 @@ function render() {
   }))
 }
 
-// --- persistencia -----------------------------------------------------
-
-// yyyy-mm-dd em horario local. new Date().toISOString() e UTC: entre 21h e
-// meia-noite em Brasilia a data virava a de amanha (na vespera da eleicao,
-// o aviso diria "sua colinha de 04/10" ainda no dia 3).
-function dataLocalISO(d = new Date()) {
-  const ano = d.getFullYear()
-  const mes = String(d.getMonth() + 1).padStart(2, '0')
-  const dia = String(d.getDate()).padStart(2, '0')
-  return `${ano}-${mes}-${dia}`
-}
-
-function salvar() {
-  try {
-    localStorage.setItem(CHAVE, JSON.stringify({
-      quando: dataLocalISO(),
-      campos: JSON.parse(paraSalvar(estado)),
-    }))
-  } catch {
-    // modo privativo do Safari: seguir sem persistir
-  }
-}
-
-function restaurar() {
-  let bruto = null
-  try {
-    bruto = localStorage.getItem(CHAVE)
-  } catch {
-    return
-  }
-  if (!bruto) return
-  let quando = null
-  let campos = '{}'
-  try {
-    const obj = JSON.parse(bruto)
-    quando = obj?.quando ?? null
-    campos = JSON.stringify(obj?.campos ?? {})
-  } catch {
-    return
-  }
-  const recuperado = lerSalvo(campos, config)
-  if (!Object.values(recuperado).some(Boolean)) return
-  estado = recuperado
-  if (quando) {
-    const [a, m, d] = quando.split('-')
-    el.avisoTxt.textContent = `Sua colinha de ${d}/${m}`
-    el.aviso.hidden = false
-  }
-}
-
 el.limpar.addEventListener('click', () => {
   estado = criarEstado(config)
-  try {
-    localStorage.removeItem(CHAVE)
-  } catch {
-    // sem storage, nada a remover
-  }
   el.aviso.hidden = true
   render()
   const primeiro = CARGOS.map((c) => document.getElementById(`input-${c.id}`))
@@ -443,7 +409,6 @@ configurarBusca({
     estado[cargo.id] = resultado.numero
     const input = document.getElementById(`input-${cargo.id}`)
     if (input) input.value = resultado.numero
-    salvar()
     render()
   },
 })
@@ -472,7 +437,6 @@ function bgPreencher(r) {
     id = 'senador2'
   }
   estado[id] = r.numero
-  salvar()
   render()
   bg.input.value = ''
   bg.limpar.hidden = true
@@ -609,13 +573,15 @@ async function iniciar() {
     return
   }
 
-  // URL tem prioridade sobre o que estava salvo: quem abre um link
-  // compartilhado quer ver aquela colinha, nao a dele.
+  // Link compartilhado abre com os numeros dele. Fora isso a colinha comeca
+  // sempre em branco: nada e guardado entre uma visita e outra.
   const daURL = lerURL(location.search, config)
   if (Object.values(daURL).some(Boolean)) {
     estado = daURL
-  } else {
-    restaurar()
+    // O aviso e o unico lugar onde mora o "Comecar de novo"; sem ele quem
+    // abre o link de outra pessoa nao tem como zerar a colinha.
+    el.avisoTxt.textContent = 'Colinha compartilhada'
+    el.aviso.hidden = false
   }
 
   if (!slotTravado(config)) {
@@ -647,7 +613,9 @@ async function iniciar() {
   render()
   el.carregando.hidden = true
   el.form.hidden = false
-  bg.raiz.hidden = false
+  // Na colinha completa todos os cargos vem travados e nao ha campo onde um
+  // resultado de busca entraria — a caixa fica escondida.
+  bg.raiz.hidden = Object.keys(estado).length === 0
   el.acoes.hidden = false
 }
 
