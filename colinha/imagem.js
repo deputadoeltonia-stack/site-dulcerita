@@ -82,6 +82,7 @@ export const TEMAS = {
     // dele, que vem da config (config.cor) — e o unico eixo que muda de uma
     // peca para a outra.
     destaque: '#cddc00',
+    digitoTxt: '#13284a', // algarismo no marinho do Dr. Elton (14/09/2026), igual ao --marinho do CSS
     tique: '#9dc23c', // os tiques soltos no fundo saem num lima mais fechado
     semSelo: true, // a peca 9x5 nao tem adesivo redondo
     legalDireita: true, // a marcacao legal virada fica na lateral direita
@@ -990,7 +991,7 @@ function caixasDoSlot(ctx, t, slot, y, cor, x0Ref = S.margem, fimRef = REF_L - S
     ctx.fillStyle = digito ? cor : t.caixa
     ctx.fill()
     if (digito) {
-      ctx.fillStyle = '#ffffff'
+      ctx.fillStyle = t.digitoTxt
       ctx.font = fonte(t, 900, SEMI, corpo)
       const md = ctx.measureText(digito)
       const meio = (md.actualBoundingBoxAscent - md.actualBoundingBoxDescent) / 2
@@ -1282,10 +1283,13 @@ async function desenharSantinho(colinha, config, t, fotos) {
 
   // Recortes das fotos dos travados, se existirem no disco. Ausencia vira
   // null e fotoRedonda cai na foto quadrada.
+  // ?v=: a HostGator serve fotos/ com max-age de 7 dias, e F5 nao rebaixa
+  // imagem pedida por script. Mexeu num recorte, sobe o numero — senao quem
+  // ja abriu a colinha segue salvando o antigo por uma semana.
   const recortes = new Map(await Promise.all(
     colinha
       .filter((s) => s.travado && s.foto)
-      .map(async (s) => [s.id, await carregarArquivo(`fotos/recorte-${s.foto}.png`)]),
+      .map(async (s) => [s.id, await carregarArquivo(`fotos/recorte-${s.foto}.png?v=2`)]),
   ))
 
   // MEDE antes de pintar: a peca de referencia tem dois travados, e a folha

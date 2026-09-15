@@ -25,9 +25,16 @@ export const CANDIDATOS = {
     razao: 'ELEIÇÃO 2026 ELTON ALVES RIBEIRO DE CARVALHO JUNIOR DEPUTADO FEDERAL',
     cnpj: '68.237.359/0001-10',
     foto: 'elton', // fotos/elton.jpg — foto oficial da campanha, nao vem do TSE
-    // Sem governador pre-preenchido. A peca impressa dele traz o Tarcisio (10),
-    // mas na tela o campo abre VAZIO: o voto de governador e do eleitor, e
-    // nem travado (`fixos`) nem sugerido (`sugestao`) cabia aqui.
+    // Governador (TARCISIO, 10) e os DOIS votos de senador (GUILHERME DERRITE
+    // 111 no 1o, ANDRE DO PRADO 222 no 2o) abrem PREENCHIDOS, como na peca
+    // impressa — mas por `sugestao`, nao por `fixos`: o campo entra no estado,
+    // aparece editavel e o eleitor pode trocar ou apagar.
+    //
+    // A trava do 222 saiu em 08/09/2026 (era `fixos: { senador1: '222' }`) e
+    // em 10/09 ele voltou como sugestao, agora no 2o voto. Com os dois slots
+    // de senador no estado, buscarGlobal oferece os dois e bgPreencher
+    // (app.js) manda o segundo resultado para o senador2 sozinho.
+    sugestao: { senador1: '111', senador2: '222', governador: '10' },
   },
   // Numero confirmado pelo santinho impresso 7x10 da campanha (15/08/2026).
   'colinhavirtual.dreltonai.com.br': {
@@ -212,6 +219,41 @@ export const SANTINHOS = {
     // votos que sobravam para ele decidir.
     fixos: { federal: '4412' },
   },
+  lindoso: {
+    nome: 'DR. MÁRCIO LINDOSO', cargo: 7, numero: '44777', partido: 'UNIÃO',
+    tema: 'santinho', rotulo: 'Deputado estadual',
+    // Amarelo do 44777 na arte (#f8cf07, medido na pagina 1 do PDF). O azul
+    // da caixa do nome (#263983, a cor mais presente da peca) fica de fora:
+    // sobre o navy desta tela ele da 1,52:1 e a caixa sumiria no fundo — o
+    // mesmo motivo que trocou a cor da Regina. O amarelo da 10,62:1, na
+    // mesma faixa do lima do Dr. Elton (10,55) e do ambar do Rogerio (9,36).
+    cor: '#f8cf07',
+    // Foto do TSE (SQ_CANDIDATO 250002533813). Nao ha arte de campanha
+    // separada para ele, como nao ha para o Leandro e o Anistaldo.
+    foto: '250002533813',
+    // Subdominio proprio em drelton4412.com.br, como os outros parceiros —
+    // nunca em dreltonai.com.br, que passa pela Hostinger.
+    hosts: ['lindoso.drelton4412.com.br', 'www.lindoso.drelton4412.com.br'],
+    // Marcacao legal da lateral da peca (Lei 9.504/97, art. 38 §1o). Aqui o
+    // "CNPJ Candidato" e o da campanha do Dr. Elton (68.237.359/0001-10), que
+    // contratou a impressao — nao o da campanha do parceiro, e diferente do
+    // que vem nas pecas do Leandro, do Rogerio e do Anistaldo (a do Tozi).
+    //
+    // A tiragem ("30.000 unidades") fica de fora pelo mesmo motivo do
+    // Leandro: ela conta exemplares de impresso, e uma tela nao tem exemplar.
+    legal: [
+      'CNPJ Candidato: 68.237.359/0001-10',
+      'CNPJ Contratado: 10.386.377/0001-84',
+    ],
+    // O verso da peca traz o Dr. Elton impresso no federal: FIXO.
+    fixos: { federal: '4412' },
+    // O governador tambem vem impresso (TARCISIO DE FREITAS, 10), mas como
+    // SUGESTAO, nao como fixo: e a mesma decisao de 08/09 na colinha do Dr.
+    // Elton — o campo abre preenchido igual ao papel e o eleitor pode trocar.
+    // Senador (1o e 2o voto) e presidente saem em branco na peca e ficam
+    // livres aqui.
+    sugestao: { governador: '10' },
+  },
   tozi: {
     nome: 'PROFESSOR TOZI', cargo: 7, numero: '44447', partido: 'UNIÃO',
     tema: 'santinho', rotulo: 'Deputado estadual',
@@ -242,6 +284,34 @@ export const SANTINHOS = {
       'CNPJ Contratado: 10.386.377/0001-84',
     ],
     fixos: { federal: '4412' },
+  },
+  // A MESMA peca do Tozi, sem o Dr. Elton impresso. Existe porque a de cima
+  // e conjunta: nela o federal ja vem travado no 4412, e havia publico para
+  // quem o Tozi e o unico voto que a campanha dele pede — os outros cinco
+  // cargos ficam com o eleitor.
+  //
+  // Sem entrada em CANDIDATOS e sem link em lugar nenhum: quem chega aqui
+  // recebeu o endereco. A pagina de /c/ que o build gera ja sai com
+  // `robots: noindex`, e o subdominio abaixo nao aparece em nenhum menu do
+  // site do Tozi.
+  tozisolo: {
+    nome: 'PROFESSOR TOZI', cargo: 7, numero: '44447', partido: 'UNIÃO',
+    tema: 'santinho', rotulo: 'Deputado estadual',
+    cor: '#0057c3', // o mesmo azul da peca dele
+    foto: 'tozi',
+    // Subdominio no dominio DELE, como manda o padrao das outras pecas: cada
+    // colinha vive no dominio da campanha que a distribui. Precisa nascer no
+    // cPanel da conta do Tozi (br856) com Document Root em public_html/colinha
+    // — a mesma pasta que o site ja publica.
+    hosts: ['colinha.proftozi44447.com.br', 'www.colinha.proftozi44447.com.br'],
+    // So "CNPJ Candidato", como no da Regina: o "Contratado" e o da grafica
+    // que imprime, e esta peca nao veio de impresso nenhum — nasceu como
+    // link. Inventar um contratado seria afirmar contratacao que ninguem fez.
+    legal: [
+      'CNPJ Candidato: 68.283.009/0001-90',
+    ],
+    // SEM `fixos`: e o ponto desta entrada. So o campo do proprio Tozi trava;
+    // federal, senadores, governador e presidente ficam em branco.
   },
   dulce: {
     nome: 'DULCE RITA', cargo: 7, numero: '44400', partido: 'UNIÃO',

@@ -1083,7 +1083,7 @@ body[data-tema="santinho"] {
      santinho leva a cor dele (--cor-parceiro, posta pela config em app.js) —
      na peca do Leandro e o mesmo lima, na do Rogerio e ambar. */
   --cx-travado: var(--limao);
-  --cx-travado-txt: #ffffff;
+  --cx-travado-txt: var(--marinho);
   color: #fff;
   background-color: #0a223e;
   /* O MESMO pattern oficial do topo (manual ID 26 ELTON p.21), na versao
@@ -1109,8 +1109,9 @@ body[data-tema="santinho"] .rotulo > span:first-child::after { color: #c3d3e8; }
 body[data-tema="santinho"] .nome { color: #fff; }
 body[data-tema="santinho"] :is(.rodape, .legal, .carregando) { color: #b4c6de; }
 
-/* Algarismo branco dentro do lima, como no impresso. */
-body[data-tema="santinho"] .digito.preenchido { color: #fff; }
+/* Algarismo no azul-marinho do Dr. Elton dentro da caixa (pedido de 14/09/2026;
+   o impresso traz branco). */
+body[data-tema="santinho"] .digito.preenchido { color: var(--marinho); }
 /* O estado de erro pinta a caixa de rosa claro: ali o branco sumiria. */
 body[data-tema="santinho"] .campo.tem-erro .digito.preenchido { color: var(--erro); }
 
